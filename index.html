@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI成长课 · 百年前程小程序原型</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Throwaway prototype: three structurally distinct homepage variants; memory-only business flow. -->
+<header class="studio-header"><a class="studio-brand" href="index.html"><span class="brand-mark">前</span><span>百年前程 <em> / </em><strong>AI成长课</strong></span></a><div class="studio-meta"><span class="live-dot"></span> 微信小程序交互原型 <span class="version">PROTOTYPE / 01</span></div></header>
+<div class="studio">
+  <aside class="rail"><div class="eyebrow">FROM CAMPUS TO CAREER</div><h1>让AI学习，<br>从你的目标出发。</h1><p class="rail-intro">面向实习与求职的大学生<br>把岗位要求，变成清晰的学习路径。</p><div class="rail-label">体验完整流程</div><div id="flow-nav"></div><div class="rail-note"><span class="note-mark">↗</span><div>也可以直接进入学习场景，<br>从一个想完成的任务开始。</div></div><button class="reset-link" data-action="reset">↻ 重置体验</button></aside>
+  <main class="preview"><div class="device-label"><span>iPhone · 393 × 852</span><button class="scale-toggle" data-action="preview-scale" title="切换适应窗口与原始尺寸">适应窗口 ↗</button></div><div class="phone"><div class="screen" id="screen"><div class="statusbar"><b>9:41</b><div class="island"></div><div class="status-icons"><span class="signal">▂▄▆</span><span>◔</span><span class="battery"></span></div></div><div class="wechat-nav" id="wechat-nav"></div><div class="app-scroll" id="app-content"></div><div id="bottom-region"></div><div class="home-indicator"></div><div id="overlay"></div><div class="toast" id="toast" role="status"></div></div></div><div class="variant-switch"><button aria-label="上一个首页方案" data-action="variant-prev">←</button><div><small>首页布局</small><strong id="variant-name">引导式</strong></div><button aria-label="下一个首页方案" data-action="variant-next">→</button></div></main>
+  <aside class="inspector"><div class="eyebrow">PAGE NOTES</div><div id="page-notes"></div><div class="spec-card"><div class="spec-title">本期产品边界</div><p>岗位与任务导向<br>分级学习内容<br>精选外部视频课程</p><div class="spec-rule"></div><p class="quiet">无创作工具、课程交易、<br>学生入驻、支付或论坛。</p></div><div class="demo-note"><b>演示说明</b><p>JD识别、测验评分和课程数据为本地示例。视频直达已配置的外部示例片源，刷新后重置体验。</p><p>本原型依据飞书产品文档制作。</p></div></aside>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
