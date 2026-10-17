@@ -2,6 +2,10 @@
 
 在线体验：https://guifanhuayi.github.io/ai-career-miniapp-prototype/
 
+首页默认平铺所有15个页面与状态，支持适应宽度、全部适应、5%–120%缩放，点击任一页面可进入对应交互原型。
+
+单页交互入口：https://guifanhuayi.github.io/ai-career-miniapp-prototype/prototype.html
+
 全部页面总览：https://guifanhuayi.github.io/ai-career-miniapp-prototype/overview.html
 
 通过 GitHub Pages 发布 `main` 分支的根目录，推送更新后自动部署。
@@ -24,6 +28,8 @@
 首页三种布局：?variant=guide（引导式）、?variant=task（任务式）、?variant=editorial（目录式）。仅首页结构不同，共用完整业务闭环。
 
 总览页面通过 ?screen= 页面参数打开相互独立的演示状态。普通入口没有预置学习路径。
+
+源码入口：`overview.html` 是平铺总览，`prototype-source.html` 是单页交互原型模板。运行 `python build.py` 后生成总览首页 `index.html` 和离线交互文件 `prototype.html`，并同步项目压缩包。
 
 验收记录：脚本语法检查通过；在浏览器人工走通JD文本示例、截图示例及核对、岗位关键词与原文证据匹配、PPT任务选择、四道测验、分级推荐、等级切换、视频时长筛选、课程详情及外部视频直接跳转。检查了首页、测验结果、课程推荐和总览的实际渲染。
 
