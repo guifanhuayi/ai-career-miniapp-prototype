@@ -1,5 +1,11 @@
 # 百年前程 · AI成长课 小程序交互原型
 
+在线体验：https://guifanhuayi.github.io/ai-career-miniapp-prototype/
+
+全部页面总览：https://guifanhuayi.github.io/ai-career-miniapp-prototype/overview.html
+
+通过 GitHub Pages 发布 `main` 分支的根目录，推送更新后自动部署。
+
 原型依据：用户提供的飞书《大学生AI学习小程序demo》，2026-10-17阅读。
 原文：https://mcn6gipq7cmq.feishu.cn/wiki/KCvbwClxuiGUUDk8rfGc35vfnde
 
