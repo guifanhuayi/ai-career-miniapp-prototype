@@ -28,3 +28,20 @@ page, body { background: @paper; color: @ink; font-family: -apple-system, BlinkM
 .choice.selected { border-color: @primary; background: @mint; }
 .deliverable { margin: 20px 0; background: @mint; padding: 18px; border-radius: 14px; }
 .chip::after, .choice::after, .catalog-row::after { border: 0; }
+.primary.secondary { background: @surface; color: @primary; border: 1px solid @border; }
+.primary.link { background: transparent; color: @primary; border: 0; }
+.primary:disabled { opacity: .5; }
+.primary:focus-visible, .choice:focus-visible, .form-input:focus-visible, .form-textarea:focus-visible { outline: 3px solid @primary; outline-offset: 3px; }
+.action-gap { margin-top: 16px; }
+.mode-switch { display: flex; gap: 8px; padding: 4px; border-radius: 12px; background: @mint; margin: 20px 0; }
+.mode-switch .mode-choice { flex: 1; width: auto; margin: 0; justify-content: center; padding: 10px 8px; border-radius: 8px; font-size: 14px; }
+.mode-switch .mode-choice.selected { background: @surface; color: @primary; }
+.form-field { margin: 18px 0 10px; }
+.form-label { display: block; color: @ink; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.form-input, .form-textarea { width: 100%; box-sizing: border-box; padding: 14px; border: 1px solid @border; border-radius: 12px; background: @surface; color: @ink; font: inherit; line-height: 1.8; }
+.form-input { height: 52px; }
+.form-textarea { min-height: 240px; height: 260px; resize: vertical; }
+.jd-preview { display: block; max-width: 100%; width: 100%; margin: 0 auto 16px; border-radius: 12px; }
+.source-text { display: block; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font-size: 13px; line-height: 1.8; color: @muted; margin-top: 12px; }
+.job-heading { overflow-wrap: anywhere; word-break: break-word; }
+.evidence-quote { display: block; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font-size: 13px; line-height: 1.8; color: @dark; background: @mint; border-radius: 8px; padding: 10px; margin-top: 10px; }

@@ -171,8 +171,10 @@ model JobDescription {
   text      String @db.LongText
   source    String @db.VarChar(24)
   version   Int @default(1)
+  uploadId  String? @db.Char(36)
   createdAt DateTime @default(now()) @db.DateTime(3)
   visitor   Visitor @relation(fields: [visitorId], references: [id])
+  upload    Upload? @relation(fields: [uploadId], references: [id])
   analyses  AnalysisJob[]
   @@index([visitorId, createdAt])
 }
@@ -188,6 +190,9 @@ model AnalysisJob {
   selectedScenes Json?
   errorCode      String? @db.VarChar(64)
   attempts       Int @default(0)
+  revision       Int @default(1)
+  leaseId        String? @db.Char(36)
+  leaseUntil     DateTime? @db.DateTime(3)
   deadline       DateTime @db.DateTime(3)
   createdAt      DateTime @default(now()) @db.DateTime(3)
   completedAt    DateTime? @db.DateTime(3)
@@ -202,10 +207,13 @@ model Upload {
   path      String @db.VarChar(500)
   mediaType String @db.VarChar(40)
   size      Int
+  sha256    String @default("") @db.Char(64)
+  purgedAt  DateTime? @db.DateTime(3)
   createdAt DateTime @default(now()) @db.DateTime(3)
   expiresAt DateTime @db.DateTime(3)
   visitor   Visitor @relation(fields: [visitorId], references: [id])
   jobs      OcrJob[]
+  jobDescriptions JobDescription[]
 }
 model OcrJob {
   id        String @id @default(uuid()) @db.Char(36)
@@ -216,6 +224,7 @@ model OcrJob {
   errorCode String? @db.VarChar(64)
   createdAt DateTime @default(now()) @db.DateTime(3)
   upload    Upload @relation(fields: [uploadId], references: [id])
+  @@unique([uploadId])
 }
 model BehaviorEvent {
   id           String @id @db.VarChar(64)

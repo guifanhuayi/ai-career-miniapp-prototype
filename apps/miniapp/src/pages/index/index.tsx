@@ -47,6 +47,11 @@ export default function EngineeringStatus() {
         此构建未上传微信，不代表真机验收。开发环境仅访问本机服务。
       </Text>
       <ActionButton
+        label="解析我的岗位"
+        onClick={() => void Taro.navigateTo({ url: '/pages/jd/index' })}
+      />
+      <View className="action-gap" />
+      <ActionButton
         label="查看学习方向目录"
         onClick={() => void Taro.navigateTo({ url: '/pages/catalog/index' })}
       />

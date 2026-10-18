@@ -1,0 +1,119 @@
+{
+  "batch": "m4-20261018T024201512Z",
+  "startedAt": "2026-10-18T02:42:01.512Z",
+  "baseline": "2673d6c0ab6127ecb0382ab16c8f5044473e93fc",
+  "codeFingerprint": "3f9ef099677fe0d9e88132ad0b5f83120069bc836951b260a0d945c4fdbd794c",
+  "node": "24.19.0",
+  "packageManager": "pnpm@11.25.0",
+  "lockHash": "cb024150e93822b0d3890beb6cdb93d3fe08fdedc06ccb35943b78de3885e0dc",
+  "fixtureHash": "b69e31f20cfbce6ec36d8ba64b6939741b36fccb15300f0e7e431bdab883ea27",
+  "steps": [
+    {
+      "name": "frozen-install",
+      "exitCode": 0,
+      "durationMs": 439,
+      "evidence": "frozen-install.txt"
+    },
+    {
+      "name": "prisma-client",
+      "exitCode": 0,
+      "durationMs": 1521,
+      "evidence": "prisma-client.txt"
+    },
+    {
+      "name": "prototype",
+      "exitCode": 0,
+      "durationMs": 837,
+      "evidence": "prototype.txt"
+    },
+    {
+      "name": "protection-tests",
+      "exitCode": 0,
+      "durationMs": 1275,
+      "evidence": "protection-tests.txt"
+    },
+    {
+      "name": "static-check",
+      "exitCode": 0,
+      "durationMs": 583,
+      "evidence": "static-check.txt"
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 5438,
+      "evidence": "typecheck.txt"
+    },
+    {
+      "name": "test-script-types",
+      "exitCode": 0,
+      "durationMs": 2542,
+      "evidence": "test-script-types.txt"
+    },
+    {
+      "name": "admin-lint",
+      "exitCode": 0,
+      "durationMs": 2098,
+      "evidence": "admin-lint.txt"
+    },
+    {
+      "name": "admin-components",
+      "exitCode": 0,
+      "durationMs": 784,
+      "evidence": "admin-components.txt"
+    },
+    {
+      "name": "domain-tests",
+      "exitCode": 0,
+      "durationMs": 769,
+      "evidence": "domain-tests.txt"
+    },
+    {
+      "name": "api-tests",
+      "exitCode": 0,
+      "durationMs": 23248,
+      "evidence": "api-tests.txt"
+    },
+    {
+      "name": "contract-drift",
+      "exitCode": 0,
+      "durationMs": 2846,
+      "evidence": "contract-drift.txt"
+    },
+    {
+      "name": "api-build",
+      "exitCode": 0,
+      "durationMs": 2518,
+      "evidence": "api-build.txt"
+    },
+    {
+      "name": "wechat-build",
+      "exitCode": 0,
+      "durationMs": 7977,
+      "evidence": "wechat-build.txt"
+    },
+    {
+      "name": "h5-build",
+      "exitCode": 0,
+      "durationMs": 12627,
+      "evidence": "h5-build.txt"
+    },
+    {
+      "name": "admin-build",
+      "exitCode": 0,
+      "durationMs": 13636,
+      "evidence": "admin-build.txt"
+    },
+    {
+      "name": "browser-tests",
+      "exitCode": 0,
+      "durationMs": 45594,
+      "evidence": "browser-tests.txt"
+    }
+  ],
+  "deferredTests": [
+    "M3-017: real2099/2100/2100.1/2101 media fixtures unavailable; generation execution not approved"
+  ],
+  "result": "passed-with-deferred-tests",
+  "finishedAt": "2026-10-18T02:44:06.490Z"
+}

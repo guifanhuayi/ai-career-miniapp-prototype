@@ -21,9 +21,12 @@ import {
   ErrorResponse,
   SafeExceptionFilter,
 } from './http';
+import { AnalysisRunner } from './jobs/analysis.runner';
+import { JobsModule } from './jobs/jobs.controller';
+import { UploadRetentionRunner } from './jobs/upload-retention.runner';
 
 @Module({
-  imports: [CoreModule, CatalogModule],
+  imports: [CoreModule, CatalogModule, JobsModule],
   controllers: [FoundationController],
   providers: [
     {
@@ -95,7 +98,7 @@ export function createDocument(app: NestExpressApplication): OpenAPIObject {
   return document;
 }
 
-export async function createApp() {
+export async function createApp(options: { startWorkers?: boolean } = {}) {
   loadLocalEnvironment();
   const config = localConfig();
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -221,6 +224,10 @@ export async function createApp() {
     },
   );
   await app.init();
+  if (options.startWorkers !== false) {
+    app.get(AnalysisRunner).start();
+    app.get(UploadRetentionRunner).start();
+  }
   const document = createDocument(app);
   SwaggerModule.setup('api/docs', app, document, {
     jsonDocumentUrl: 'api/openapi.json',

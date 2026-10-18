@@ -1,0 +1,30 @@
+$ playwright test
+[WebServer] (node:37972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 18 tests using 1 worker
+
+(node:38564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\catalog.spec.ts:6:5 › M3-E01 CAT-001/002: real directory search/category intersection/empty reset/task selection (2.7s)
+  ok  2 tests\e2e\catalog.spec.ts:48:5 › M3-E02 CAT-002: loading failure is not an empty result; retry recovers and slow stale search cannot replace latest (2.3s)
+  ok  3 tests\e2e\catalog.spec.ts:81:5 › M3-E03 VIS-001: original green catalog/icons and readable narrow layouts at320/393/430 (3.4s)
+  ok  4 tests\e2e\catalog.spec.ts:112:5 › M3-E04 ADM-003 MT-120/124: Pro edit cancel preserves content; real save updates H5; stale version shows409 inside form (7.1s)
+  ok  5 tests\e2e\catalog.spec.ts:185:5 › M3-E05 ADM-002/003: course/question forms retain template style and required validation; release audit real (3.8s)
+  ok  6 tests\e2e\catalog.spec.ts:215:5 › M3-E06 ADM-002 MT-116/121: Pro creates a real draft, publishes to catalog and archives with audit (4.3s)
+  ok  7 tests\e2e\engineering.spec.ts:4:5 › M2-E01: H5 connects to MySQL API and restores one anonymous visitor after reload (410ms)
+  ok  8 tests\e2e\engineering.spec.ts:29:5 › M2-E02: H5 request failure is visible and retry recovers without resetting visitor (386ms)
+  ok  9 tests\e2e\engineering.spec.ts:39:5 › M2-E03: official Pro status page reads guarded API and reports backend failure truthfully (1.5s)
+  ok 10 tests\e2e\engineering.spec.ts:64:5 › M2-E04: approved white/blue tokens and393reference typography survive H5 scaling with no narrow-screen overflow (605ms)
+  ok 11 tests\e2e\jobs.spec.ts:13:5 › M4-E01 MT-019–025/041–048: literal text, Unicode bounds, confirmed evidence and candidate selection (2.0s)
+  ok 12 tests\e2e\jobs.spec.ts:64:5 › M4-E02 MT-024/025/031/032: example waits for confirmation, lost response retry keeps one immutable input (1.9s)
+  ok 13 tests\e2e\jobs.spec.ts:99:5 › M4-E03 MT-025/033–037: simulated screenshot review is editable, confirmed only and survives reload (2.3s)
+  ok 14 tests\e2e\jobs.spec.ts:139:5 › M4-E04 MT-026/028–030/034/035: ordinary image stays manual and bad replacement retains valid upload (2.1s)
+  ok 15 tests\e2e\jobs.spec.ts:192:5 › M4-E05 MT-038–040: unavailable poll is an error and reloading restores the same analysis (1.8s)
+  ok 16 tests\e2e\jobs.spec.ts:214:5 › M4-E06 MT-025/036: text/image drafts stay independent and replacing with an example needs confirmation (1.0s)
+  ok 17 tests\e2e\jobs.spec.ts:251:5 › M4-E07 MT-040: late OCR from a hidden page cannot replace a newer image or force old navigation (1.7s)
+  ok 18 tests\e2e\jobs.spec.ts:323:5 › M4-E08 MT-039: injected timeout terminal offers a real new analysis, keeping its confirmed snapshot (1.9s)
+
+  18 passed (44.7s)

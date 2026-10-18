@@ -61,27 +61,13 @@ import {
   LocalAdminGuard,
 } from './http';
 import { MediaVerifier } from './media';
+import { ApiPaging as Paging } from './pagination';
 
 const Operation = (operationId: string, summary: string, description: string) =>
   ApiOperation({ operationId, summary, description });
 const Path = (name: string) => ApiParam({ name, type: String });
 const Ok = (type: Type<unknown>) => ApiOkResponse({ type });
 const Input = (type: Type<unknown>) => ApiBody({ type });
-// Explicit named query parameters retain enum constraints in Swagger 12.
-const Paging = () =>
-  applyDecorators(
-    ApiQuery({
-      name: 'page',
-      required: false,
-      schema: { type: 'integer', minimum: 1, maximum: 10000, default: 1 },
-    }),
-    ApiQuery({
-      name: 'pageSize',
-      required: false,
-      schema: { type: 'integer', minimum: 1, maximum: 100, default: 20 },
-    }),
-    ApiQuery({ name: 'search', required: false, type: String, maxLength: 100 }),
-  );
 const AdminFilters = () =>
   applyDecorators(
     Paging(),

@@ -1,10 +1,13 @@
 import Taro from '@tarojs/taro';
 import {
+  type ApiOptions,
   type ApiResult,
   createApiClient,
+  type OperationName,
 } from '../../../../packages/contracts/client';
 
 declare const API_BASE_URL: string;
+export const apiOrigin = API_BASE_URL;
 const credentialKey = 'career.visitor.credential.v1';
 export const api = createApiClient(async (request) => {
   const response = await Taro.request<unknown>({
@@ -24,6 +27,22 @@ export const api = createApiClient(async (request) => {
   return { status: response.statusCode, data: response.data };
 });
 let pendingVisitor: Promise<ApiResult<'getCurrentVisitor'>> | undefined;
+export async function getCredential() {
+  const stored: unknown = Taro.getStorageSync(credentialKey);
+  if (typeof stored === 'string' && /^[a-f0-9]{64}$/.test(stored))
+    return stored;
+  await ensureVisitor();
+  const created: unknown = Taro.getStorageSync(credentialKey);
+  if (typeof created !== 'string' || !/^[a-f0-9]{64}$/.test(created))
+    throw new Error('本机访客凭据保存失败，请重试');
+  return created;
+}
+export async function guestApi<N extends OperationName>(
+  name: N,
+  options: Omit<ApiOptions<N>, 'credential' | 'admin'> = {},
+) {
+  return api(name, { ...options, credential: await getCredential() });
+}
 export async function ensureVisitor(): Promise<ApiResult<'getCurrentVisitor'>> {
   if (pendingVisitor) return pendingVisitor;
   pendingVisitor = (async () => {

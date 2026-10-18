@@ -5,7 +5,7 @@ export default function ActionButton(props: ActionButtonProps) {
   return (
     <button
       type="button"
-      className="primary"
+      className={`primary ${props.variant ?? ''}`}
       aria-label={props.label}
       aria-busy={props.loading}
       disabled={props.disabled}

@@ -5,6 +5,7 @@ export default function Choice(props: ChoiceProps) {
     <Button
       className={`${props.className ?? 'choice'}${props.selected ? ' selected' : ''}`}
       ariaLabel={props.label}
+      disabled={props.disabled}
       onClick={props.onClick}
     >
       {props.children}

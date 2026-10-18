@@ -139,15 +139,25 @@ export function validateEvidence(
   items: Evidence[],
   known: readonly string[],
 ) {
-  return items.every(
-    (item) =>
-      known.includes(item.sceneId) &&
-      (item.kind === 'extension'
-        ? item.quote === ''
-        : Number.isInteger(item.start) &&
-          item.start >= 0 &&
-          item.end > item.start &&
-          text.slice(item.start, item.end) === item.quote),
+  return (
+    Array.isArray(items) &&
+    new Set(items.map((item) => item?.sceneId)).size === items.length &&
+    items.every(
+      (item) =>
+        item !== null &&
+        typeof item === 'object' &&
+        (item.kind === 'direct' || item.kind === 'extension') &&
+        typeof item.quote === 'string' &&
+        known.includes(item.sceneId) &&
+        (item.kind === 'extension'
+          ? item.quote === '' && item.start === 0 && item.end === 0
+          : Number.isInteger(item.start) &&
+            Number.isInteger(item.end) &&
+            item.start >= 0 &&
+            item.end <= text.length &&
+            item.end > item.start &&
+            text.slice(item.start, item.end) === item.quote),
+    )
   );
 }
 export const learningEvents = new Set([

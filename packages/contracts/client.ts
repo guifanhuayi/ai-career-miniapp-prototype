@@ -135,6 +135,66 @@ export const routes = {
     "path": "/api/v1/admin/content-audits",
     "method": "GET",
     "successStatus": 200
+  },
+  "createJobDescription": {
+    "path": "/api/v1/job-descriptions",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "getJobDescription": {
+    "path": "/api/v1/job-descriptions/{jobDescriptionId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "createAnalysisJob": {
+    "path": "/api/v1/analysis-jobs",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "listAnalysisJobs": {
+    "path": "/api/v1/analysis-jobs",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "getAnalysisJob": {
+    "path": "/api/v1/analysis-jobs/{analysisJobId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "cancelAnalysisJob": {
+    "path": "/api/v1/analysis-jobs/{analysisJobId}",
+    "method": "PATCH",
+    "successStatus": 200
+  },
+  "saveAnalysisSelection": {
+    "path": "/api/v1/analysis-jobs/{analysisJobId}/selection",
+    "method": "PUT",
+    "successStatus": 200
+  },
+  "createPrivateUpload": {
+    "path": "/api/v1/uploads",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "getPrivateUpload": {
+    "path": "/api/v1/uploads/{uploadId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "getPrivateUploadContent": {
+    "path": "/api/v1/uploads/{uploadId}/content",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "createOcrJob": {
+    "path": "/api/v1/ocr-jobs",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "getOcrJob": {
+    "path": "/api/v1/ocr-jobs/{ocrJobId}",
+    "method": "GET",
+    "successStatus": 200
   }
 } as const;
 export type OperationName = keyof typeof routes;
@@ -142,9 +202,10 @@ type ResponseOf<T> = T extends {content: {'application/json': infer R}} ? R : vo
 export type ApiResult<N extends OperationName> = operations[N] extends {responses: infer R} ? ResponseOf<R[Extract<keyof R, 200 | 201 | 202 | 204>]> : never;
 export type ApiBody<N extends OperationName> = operations[N] extends {requestBody: {content: {'application/json': infer B}}} ? B : never;
 type Parameter<N extends OperationName, K extends string> = operations[N] extends {parameters: infer P} ? K extends keyof P ? P[K] : never : never;
+export type ApiOptions<N extends OperationName> = {body?: ApiBody<N>; credential?: string; admin?: boolean; path?: Parameter<N,'path'>; query?: Parameter<N,'query'>};
 export type Transport = (request: {path: string; method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'; body?: unknown; credential?: string; admin?: boolean}) => Promise<{status: number; data: unknown}>;
 export function createApiClient(transport: Transport) {
-  return async function call<N extends OperationName>(name: N, options: {body?: ApiBody<N>; credential?: string; admin?: boolean; path?: Parameter<N,'path'>; query?: Parameter<N,'query'>} = {}): Promise<ApiResult<N>> {
+  return async function call<N extends OperationName>(name: N, options: ApiOptions<N> = {}): Promise<ApiResult<N>> {
     const route = routes[name];
     const {path:parameters,query,...requestOptions}=options;
     let path:string=route.path;

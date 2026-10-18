@@ -7,7 +7,9 @@ import Choice from '../../components/Choice';
 import { api } from '../../services/api';
 
 export default function Scene() {
-  const sceneId = Taro.useRouter().params.sceneId ?? '';
+  const query = Taro.useRouter().params;
+  const sceneId = query.sceneId ?? '';
+  const analysisJobId = query.analysisJobId;
   const [scene, setScene] = useState<ApiResult<'getScene'>>();
   const [tasks, setTasks] = useState<ApiResult<'listSceneTasks'>['items']>([]);
   const [selected, setSelected] = useState('');
@@ -92,10 +94,15 @@ export default function Scene() {
         </>
       )}
       <ActionButton
-        label="返回学习目录"
+        label={analysisJobId ? '返回本次分析' : '返回学习目录'}
         onClick={() => {
           if (Taro.getCurrentPages().length > 1) void Taro.navigateBack();
-          else void Taro.redirectTo({ url: '/pages/catalog/index' });
+          else
+            void Taro.redirectTo({
+              url: analysisJobId
+                ? `/pages/analysis/index?analysisJobId=${encodeURIComponent(analysisJobId)}`
+                : '/pages/catalog/index',
+            });
         }}
       />
     </View>

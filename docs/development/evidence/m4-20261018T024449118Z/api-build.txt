@@ -1,0 +1,2 @@
+$ pnpm --filter @career/api build
+$ tsc -p tsconfig.json

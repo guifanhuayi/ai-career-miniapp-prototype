@@ -4,7 +4,7 @@ import openapiTS, { astToString } from 'openapi-typescript';
 import { createApp, createDocument } from '../apps/api/src/app';
 
 async function main() {
-  const app = await createApp();
+  const app = await createApp({ startWorkers: false });
   try {
     const document = createDocument(app);
     const schema = `${JSON.stringify(document, null, 2)}\n`;

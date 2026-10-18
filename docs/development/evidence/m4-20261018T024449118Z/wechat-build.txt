@@ -1,0 +1,118 @@
+$ pnpm --filter @career/miniapp build:weapp
+$ taro build --type weapp
+👽 Taro v4.3.0
+
+Tips:
+1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。
+
+
+
+● Webpack █████████████████████████  (0%)  
+ 
+
+
+● Webpack █████████████████████████ building (10%) 0/10 entries 10/10 dependen
+cies 0/10 modules 1 active 
+ babel-loader › src\app.config.ts
+
+
+● Webpack █████████████████████████ building (10%) 0/10 entries 10/10 dependen
+cies 0/10 modules 1 active 
+ babel-loader › src\app.config.ts
+
+
+● Webpack █████████████████████████ building (10%) 0/10 entries 10/11 dependen
+cies 0/10 modules 10 active 
+ ...4858924ed7\node_modules\@tarojs\webpack5-runner\dist\template\custom-wrapp
+er.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 18/105 depende
+ncies 1/18 modules 17 active 
+ ...pace\Product\ai-career-miniapp-prototype\apps\miniapp\src\assets\jd-exampl
+e.png
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 84/105 depende
+ncies 1/35 modules 33 active 
+ ...roduct\ai-career-miniapp-prototype\packages\domain\fixtures\ocr\mock-jd-v1
+.json
+
+
+● Webpack █████████████████████████ building (15%)  
+ ...postcs_a0bd507555ccc16649a501f45639cee4\node_modules\postcss-loader\dist\c
+js.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 167/219 depend
+encies 35/82 modules 38 active 
+ babel-loader › ..\..\packages\contracts\client.ts
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 173/222 depend
+encies 35/86 modules 50 active 
+ ...7.29.10\node_modules\@babel\runtime\helpers\esm\objectWithoutPropertiesLoo
+se.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 219/234 depend
+encies 42/126 modules 84 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\toPropertyK
+ey.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 302/439 depend
+encies 59/128 modules 68 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\toPropertyK
+ey.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 478/493 depend
+encies 84/159 modules 67 active 
+ ...les\.pnpm\@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\g
+et.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 515/532 depend
+encies 99/165 modules 64 active 
+ ...react-reconciler@0.29.0_react@18.3.1\node_modules\react-reconciler\constan
+ts.js
+
+
+● Webpack █████████████████████████ building (15%) 1/10 entries 555/558 depend
+encies 144/175 modules 31 active 
+ ...npm\react-reconciler@0.29.0_react@18.3.1\node_modules\react-reconciler\ind
+ex.js
+
+
+● Webpack █████████████████████████ building (26%) 3/10 entries 569/572 depend
+encies 157/182 modules 25 active 
+ ...e@4.3.0_@tarojs+shared@4.3.0\node_modules\@tarojs\api\dist\interceptor\ind
+ex.js
+
+
+● Webpack █████████████████████████ building (59%) 9/10 entries 580/580 depend
+encies 181/187 modules 5 active 
+ ...f16b6e53f3c00a864e5ef3eebf\node_modules\css-loader\dist\runtime\noSourceMa
+ps.js
+
+
+● Webpack █████████████████████████ sealing (78%)  
+ chunk modules optimization
+
+
+● Webpack █████████████████████████ sealing (88%)  
+ runtime requirements
+
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ CssMinimizerPlugin
+
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ RealContentHashPlugin
+
+
+√ Webpack
+  Compiled successfully in 3.83s
+

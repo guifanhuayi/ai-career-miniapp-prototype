@@ -4,7 +4,7 @@ import type { ActionButtonProps } from './types';
 export default function ActionButton(props: ActionButtonProps) {
   return (
     <Button
-      className="primary"
+      className={`primary ${props.variant ?? ''}`}
       ariaRole="button"
       ariaLabel={props.label}
       loading={props.loading}
