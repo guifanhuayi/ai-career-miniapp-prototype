@@ -591,6 +591,27 @@ test('M3-017 COURSE-006: real2099/2100 accepted and2100.1/2101 rejected', {
   }
 });
 
+test('M8-C01 MT124: new admin course is visible on first page even with many existing rows', async () => {
+  const older = await create({ title: `${namespace}-old` });
+  const newest = await db.course.create({
+    data: {
+      id: `zz-${namespace}`,
+      title: `${namespace}-new`,
+      author: '本地回归样例',
+      chapters: [],
+      isTest: true,
+      updatedAt: new Date(Date.now() + 1000),
+    },
+  });
+  createdCourses.push(newest.id);
+  const page = await call(
+    `/admin/courses?search=${encodeURIComponent(namespace)}&pageSize=1`,
+  );
+  assert.ok(page.total >= 2);
+  assert.equal(page.items[0].id, newest.id);
+  assert.notEqual(page.items[0].id, older.id);
+});
+
 test('M3-018 API-001/003: remaining admin list schemas, documented filters, canonical missing resources and safe nested errors', async () => {
   await call('/admin/content-audits?pageSize=2');
   const scenes = await call('/admin/scenes?status=published&pageSize=100');

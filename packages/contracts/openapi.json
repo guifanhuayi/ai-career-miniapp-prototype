@@ -2081,7 +2081,7 @@
     },
     "/api/v1/admin/courses": {
       "get": {
-        "description": "未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。",
+        "description": "未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。管理列表按updatedAt/id倒序，新建/修改后可定位；公共目录仍按id稳定排序。",
         "operationId": "listAdminCourses",
         "parameters": [
           {
@@ -7441,6 +7441,303 @@
           "learning"
         ]
       }
+    },
+    "/api/v1/events": {
+      "post": {
+        "description": "1–50条，白名单，eventId同内容幂等、异内容409。服务端确定归属/环境/session；不接收成功事件、原文或任意properties。视频常规位置15秒限频，位置不是可信学习时长。原子批次。",
+        "operationId": "collectEvents",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventBatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventReceipt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数或未知字段错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "缺失或无效访客凭据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "本地访问约束失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不可用或不属于本人",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "版本/幂等冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "请求过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "媒体不受支持",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务规则不满足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务或数据库暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "visitorBearer": []
+          }
+        ],
+        "summary": "采集本人客户端行为",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/api/v1/admin/analytics": {
+      "get": {
+        "description": "默认production，最近7个北京时间自然日，可查最近365天。只输出汇总，日/周活跃按访客并集；双入口独立漏斗、成熟D1/D7、课程事实分列。P50/P95限可用14天原始样本，人工质量未评审。",
+        "operationId": "getAnalyticsReport",
+        "parameters": [
+          {
+            "name": "endDay",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDay",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "production",
+                "local",
+                "test",
+                "demo"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsReport"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数或未知字段错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "缺失或无效访客凭据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "本地访问约束失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "资源不可用或不属于本人",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "版本/幂等冲突",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "请求过大",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "媒体不受支持",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务规则不满足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率超限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务或数据库暂不可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "localAdmin": []
+          }
+        ],
+        "summary": "本地运营行为报表",
+        "tags": [
+          "analytics"
+        ]
+      }
     }
   },
   "info": {
@@ -9250,6 +9547,445 @@
         "required": [
           "courseId",
           "marked"
+        ]
+      },
+      "ClientEvent": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "page_view",
+              "jd_submit",
+              "ocr_result_confirmed",
+              "scene_selected",
+              "recommendation_viewed",
+              "course_detail_viewed",
+              "course_open_attempted",
+              "video_started",
+              "video_paused",
+              "video_progress",
+              "video_ended",
+              "learning_plan_resumed"
+            ]
+          },
+          "schemaVersion": {
+            "type": "number",
+            "enum": [
+              1
+            ]
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appVersion": {
+            "type": "string"
+          },
+          "flowId": {
+            "type": "string"
+          },
+          "sceneId": {
+            "type": "string"
+          },
+          "planId": {
+            "type": "string"
+          },
+          "courseId": {
+            "type": "string"
+          },
+          "analysisJobId": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "eventId",
+          "name",
+          "schemaVersion",
+          "occurredAt",
+          "appVersion"
+        ]
+      },
+      "EventBatch": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "minItems": 1,
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientEvent"
+            }
+          }
+        },
+        "required": [
+          "events"
+        ]
+      },
+      "EventReceipt": {
+        "type": "object",
+        "properties": {
+          "accepted": {
+            "type": "number"
+          },
+          "duplicates": {
+            "type": "number"
+          },
+          "throttled": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "accepted",
+          "duplicates",
+          "throttled"
+        ]
+      },
+      "ActivityRow": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "dau": {
+            "type": "number"
+          },
+          "wau": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "day",
+          "dau",
+          "wau"
+        ]
+      },
+      "FunnelRow": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "chains": {
+            "type": "number"
+          },
+          "flows": {
+            "type": "number"
+          },
+          "visitors": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "chains",
+          "flows",
+          "visitors"
+        ]
+      },
+      "RetentionPoint": {
+        "type": "object",
+        "properties": {
+          "observationDay": {
+            "type": "string"
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "ongoing": {
+            "type": "boolean"
+          },
+          "returned": {
+            "type": "number",
+            "nullable": true
+          },
+          "rate": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "observationDay",
+          "pending",
+          "ongoing",
+          "returned",
+          "rate"
+        ]
+      },
+      "RetentionRow": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "cohortSize": {
+            "type": "number"
+          },
+          "d1": {
+            "$ref": "#/components/schemas/RetentionPoint"
+          },
+          "d7": {
+            "$ref": "#/components/schemas/RetentionPoint"
+          }
+        },
+        "required": [
+          "day",
+          "cohortSize",
+          "d1",
+          "d7"
+        ]
+      },
+      "EventCount": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "count"
+        ]
+      },
+      "DistributionRow": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventCount"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "resourceId",
+          "events"
+        ]
+      },
+      "RequestReport": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "failures": {
+            "type": "number"
+          },
+          "retries": {
+            "type": "number"
+          },
+          "successRate": {
+            "type": "number",
+            "nullable": true
+          },
+          "p50Ms": {
+            "type": "number",
+            "nullable": true
+          },
+          "p95Ms": {
+            "type": "number",
+            "nullable": true
+          },
+          "percentileSamples": {
+            "type": "number"
+          },
+          "percentileStart": {
+            "type": "string"
+          },
+          "percentileEnd": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventCount"
+            }
+          }
+        },
+        "required": [
+          "count",
+          "failures",
+          "retries",
+          "successRate",
+          "p50Ms",
+          "p95Ms",
+          "percentileSamples",
+          "percentileStart",
+          "percentileEnd",
+          "errors"
+        ]
+      },
+      "AnalysisReport": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "succeeded": {
+            "type": "number"
+          },
+          "failed": {
+            "type": "number"
+          },
+          "timedOut": {
+            "type": "number"
+          },
+          "noMatch": {
+            "type": "number"
+          },
+          "suggestions": {
+            "type": "number"
+          },
+          "deselected": {
+            "type": "number"
+          },
+          "reviewedSelections": {
+            "type": "number"
+          },
+          "noMatchRate": {
+            "type": "number",
+            "nullable": true
+          },
+          "deselectionRate": {
+            "type": "number",
+            "nullable": true
+          },
+          "evidenceQuality": {
+            "type": "string"
+          },
+          "humanReview": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "count",
+          "succeeded",
+          "failed",
+          "timedOut",
+          "noMatch",
+          "suggestions",
+          "deselected",
+          "reviewedSelections",
+          "noMatchRate",
+          "deselectionRate",
+          "evidenceQuality",
+          "humanReview",
+          "provider"
+        ]
+      },
+      "AnalyticsReport": {
+        "type": "object",
+        "properties": {
+          "environment": {
+            "type": "string"
+          },
+          "startDay": {
+            "type": "string"
+          },
+          "endDay": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "generatedAt": {
+            "type": "string"
+          },
+          "activeVisitors": {
+            "type": "number"
+          },
+          "activity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityRow"
+            }
+          },
+          "jobFunnel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FunnelRow"
+            }
+          },
+          "taskFunnel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FunnelRow"
+            }
+          },
+          "retention": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetentionRow"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventCount"
+            }
+          },
+          "distribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistributionRow"
+            }
+          },
+          "requests": {
+            "$ref": "#/components/schemas/RequestReport"
+          },
+          "analysis": {
+            "$ref": "#/components/schemas/AnalysisReport"
+          },
+          "clockAnomalies": {
+            "type": "number"
+          },
+          "positionAnomalies": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "environment",
+          "startDay",
+          "endDay",
+          "timezone",
+          "generatedAt",
+          "activeVisitors",
+          "activity",
+          "jobFunnel",
+          "taskFunnel",
+          "retention",
+          "events",
+          "distribution",
+          "requests",
+          "analysis",
+          "clockAnomalies",
+          "positionAnomalies",
+          "notes"
         ]
       }
     }

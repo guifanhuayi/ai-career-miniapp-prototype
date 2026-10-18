@@ -288,7 +288,7 @@ export interface paths {
         };
         /**
          * 维护课程草稿与发布
-         * @description 未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。
+         * @description 未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。管理列表按updatedAt/id倒序，新建/修改后可定位；公共目录仍按id稳定排序。
          */
         get: operations["listAdminCourses"];
         put?: never;
@@ -859,6 +859,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 采集本人客户端行为
+         * @description 1–50条，白名单，eventId同内容幂等、异内容409。服务端确定归属/环境/session；不接收成功事件、原文或任意properties。视频常规位置15秒限频，位置不是可信学习时长。原子批次。
+         */
+        post: operations["collectEvents"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/analytics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 本地运营行为报表
+         * @description 默认production，最近7个北京时间自然日，可查最近365天。只输出汇总，日/周活跃按访客并集；双入口独立漏斗、成熟D1/D7、课程事实分列。P50/P95限可用14天原始样本，人工质量未评审。
+         */
+        get: operations["getAnalyticsReport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1306,6 +1346,109 @@ export interface components {
         MarkResponse: {
             courseId: string;
             marked: boolean;
+        };
+        ClientEvent: {
+            eventId: string;
+            /** @enum {string} */
+            name: "page_view" | "jd_submit" | "ocr_result_confirmed" | "scene_selected" | "recommendation_viewed" | "course_detail_viewed" | "course_open_attempted" | "video_started" | "video_paused" | "video_progress" | "video_ended" | "learning_plan_resumed";
+            /** @enum {number} */
+            schemaVersion: 1;
+            /** Format: date-time */
+            occurredAt: string;
+            appVersion: string;
+            flowId?: string;
+            sceneId?: string;
+            planId?: string;
+            courseId?: string;
+            analysisJobId?: string;
+            position?: number;
+        };
+        EventBatch: {
+            events: components["schemas"]["ClientEvent"][];
+        };
+        EventReceipt: {
+            accepted: number;
+            duplicates: number;
+            throttled: number;
+        };
+        ActivityRow: {
+            day: string;
+            dau: number;
+            wau: number;
+        };
+        FunnelRow: {
+            name: string;
+            chains: number;
+            flows: number;
+            visitors: number;
+        };
+        RetentionPoint: {
+            observationDay: string;
+            pending: boolean;
+            ongoing: boolean;
+            returned: number | null;
+            rate: number | null;
+        };
+        RetentionRow: {
+            day: string;
+            cohortSize: number;
+            d1: components["schemas"]["RetentionPoint"];
+            d7: components["schemas"]["RetentionPoint"];
+        };
+        EventCount: {
+            name: string;
+            count: number;
+        };
+        DistributionRow: {
+            kind: string;
+            resourceId: string;
+            events: components["schemas"]["EventCount"][];
+        };
+        RequestReport: {
+            count: number;
+            failures: number;
+            retries: number;
+            successRate: number | null;
+            p50Ms: number | null;
+            p95Ms: number | null;
+            percentileSamples: number;
+            percentileStart: string;
+            percentileEnd: string;
+            errors: components["schemas"]["EventCount"][];
+        };
+        AnalysisReport: {
+            count: number;
+            succeeded: number;
+            failed: number;
+            timedOut: number;
+            noMatch: number;
+            suggestions: number;
+            deselected: number;
+            reviewedSelections: number;
+            noMatchRate: number | null;
+            deselectionRate: number | null;
+            evidenceQuality: string;
+            humanReview: string;
+            provider: string;
+        };
+        AnalyticsReport: {
+            environment: string;
+            startDay: string;
+            endDay: string;
+            timezone: string;
+            generatedAt: string;
+            activeVisitors: number;
+            activity: components["schemas"]["ActivityRow"][];
+            jobFunnel: components["schemas"]["FunnelRow"][];
+            taskFunnel: components["schemas"]["FunnelRow"][];
+            retention: components["schemas"]["RetentionRow"][];
+            events: components["schemas"]["EventCount"][];
+            distribution: components["schemas"]["DistributionRow"][];
+            requests: components["schemas"]["RequestReport"];
+            analysis: components["schemas"]["AnalysisReport"];
+            clockAnomalies: number;
+            positionAnomalies: number;
+            notes: string[];
         };
     };
     responses: never;
@@ -6997,6 +7140,232 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarkResponse"];
+                };
+            };
+            /** @description 参数或未知字段错误 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 缺失或无效访客凭据 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 本地访问约束失败 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 资源不可用或不属于本人 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 版本/幂等冲突 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 请求过大 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 媒体不受支持 */
+            415: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 业务规则不满足 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 请求频率超限 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 服务或数据库暂不可用 */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    collectEvents: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EventBatch"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventReceipt"];
+                };
+            };
+            /** @description 参数或未知字段错误 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 缺失或无效访客凭据 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 本地访问约束失败 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 资源不可用或不属于本人 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 版本/幂等冲突 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 请求过大 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 媒体不受支持 */
+            415: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 业务规则不满足 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 请求频率超限 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description 服务或数据库暂不可用 */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    getAnalyticsReport: {
+        parameters: {
+            query?: {
+                endDay?: string;
+                startDay?: string;
+                environment?: "production" | "local" | "test" | "demo";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnalyticsReport"];
                 };
             };
             /** @description 参数或未知字段错误 */

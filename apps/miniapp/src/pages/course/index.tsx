@@ -15,11 +15,13 @@ import Choice from '../../components/Choice';
 import CourseVideo from '../../components/CourseVideo';
 import type { VideoControls } from '../../components/CourseVideo/types';
 import LoadState from '../../components/LoadState';
+import { track, usePageView } from '../../services/analytics';
 import { apiOrigin, guestApi } from '../../services/api';
 import { learningUrl, messageOf } from '../../services/learning';
 import { useResource } from '../../services/useResource';
 
 export default function Course() {
+  usePageView();
   const q = Taro.useRouter().params;
   const planId = q.planId ?? '';
   const courseId = q.courseId ?? '';
@@ -46,6 +48,15 @@ export default function Course() {
   const lastSave = useRef(0);
   const visible = useRef(true);
   const pendingKey = `career.progress.pending.v1.${identity}`;
+  const buttonAttempt = useRef(false);
+  useEffect(() => {
+    if (data) track('course_detail_viewed', { planId, courseId });
+  }, [data?.course.id]);
+  const play = () => {
+    track('course_open_attempted', { planId, courseId });
+    buttonAttempt.current = true;
+    controls.current?.play();
+  };
   useEffect(() => {
     if (data) {
       progress.current = data.progress;
@@ -175,7 +186,7 @@ export default function Course() {
         className="choice course-cover"
         label="点击封面播放本课"
         disabled={!ready || !!playError}
-        onClick={() => controls.current?.play()}
+        onClick={play}
       >
         {c.title} · ▶
       </Choice>
@@ -205,20 +216,33 @@ export default function Course() {
           }}
           onPlay={() => {
             if (!visible.current) controls.current?.pause();
+            else {
+              if (!buttonAttempt.current)
+                track('course_open_attempted', { planId, courseId });
+              buttonAttempt.current = false;
+              track('video_started', {
+                planId,
+                courseId,
+                position: position.current,
+              });
+            }
           }}
           onTime={(value) => {
             if (Number.isFinite(value)) {
               position.current = value;
               dirty.current = true;
               ended.current = false;
+              track('video_progress', { planId, courseId, position: value });
             }
           }}
           onPause={(value) => {
+            track('video_paused', { planId, courseId, position: value });
             position.current = value;
             dirty.current = true;
             save();
           }}
           onEnded={(value) => {
+            track('video_ended', { planId, courseId, position: value });
             position.current = value;
             ended.current = true;
             dirty.current = true;
@@ -310,7 +334,7 @@ export default function Course() {
       <ActionButton
         label="播放这门课程"
         disabled={!ready || !!playError}
-        onClick={() => controls.current?.play()}
+        onClick={play}
       />
       <View className="action-gap" />
       <ActionButton

@@ -7,6 +7,7 @@ import exampleImage from '../../assets/jd-example.png';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
 import FormField from '../../components/FormField';
+import { usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import { chooseImage, imagePreview, uploadImage } from '../../services/images';
 import {
@@ -20,6 +21,7 @@ import {
 } from '../../services/jd-drafts';
 
 export default function JobInput() {
+  usePageView();
   const query = Taro.useRouter().params;
   const [mode, setMode] = useState<'text' | 'image'>(
     query.mode === 'image' ? 'image' : 'text',

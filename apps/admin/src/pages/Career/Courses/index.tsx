@@ -44,7 +44,9 @@ export default function Courses() {
   const [saving, setSaving] = useState(false);
   const key = useRef(crypto.randomUUID());
   const [form] = Form.useForm<Fields>();
+  const loadSequence = useRef(0);
   const load = async () => {
+    const current = ++loadSequence.current;
     setError('');
     setLoading(true);
     try {
@@ -57,16 +59,21 @@ export default function Courses() {
           status: status as 'draft' | 'published' | 'archived' | undefined,
         },
       });
-      setItems(data.items);
-      setTotal(data.total);
+      if (current === loadSequence.current) {
+        setItems(data.items);
+        setTotal(data.total);
+      }
     } catch (failure) {
-      setError(errorText(failure));
+      if (current === loadSequence.current) setError(errorText(failure));
     } finally {
-      setLoading(false);
+      if (current === loadSequence.current) setLoading(false);
     }
   };
   useEffect(() => {
     void load();
+    return () => {
+      ++loadSequence.current;
+    };
   }, [page, search, status]);
   useEffect(() => {
     void (async () => {
@@ -152,7 +159,14 @@ export default function Courses() {
           body: { ...fields, version: editing.version },
         });
       setEditing(undefined);
-      await load();
+      if (
+        editing === 'new' &&
+        (page !== 1 || search !== '' || status !== undefined)
+      ) {
+        setPage(1);
+        setSearch('');
+        setStatus(undefined);
+      } else await load();
     } catch (failure) {
       setError(errorText(failure));
     } finally {
@@ -184,6 +198,8 @@ export default function Courses() {
         >
           <Space style={{ marginBottom: 16 }} wrap>
             <Input.Search
+              key={search}
+              defaultValue={search}
               aria-label="搜索课程"
               placeholder="课程标题"
               onSearch={(value) => {
@@ -193,6 +209,7 @@ export default function Courses() {
               allowClear
             />
             <Select
+              value={status}
               aria-label="课程状态"
               placeholder="全部状态"
               allowClear

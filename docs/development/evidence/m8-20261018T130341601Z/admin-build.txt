@@ -1,0 +1,42 @@
+$ pnpm --filter @career/admin build
+$ max build
+info  - [你知道吗？] max g tsconfig 可一键完成项目的 TypeScript 配置。
+info  - Umi v4.7.3
+info  - Preparing...
+i Compiling Webpack
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+√ Webpack: Compiled successfully in 14.58s
+info  - Memory Usage: 854.52 MB (RSS: 1246.43 MB)
+
+info  - File sizes after gzip:
+
+  389.84 kB  dist\umi.d86b9994.js
+  174.72 kB  dist\532.6824c4d8.async.js
+  78.33 kB   dist\76.8afb7a73.async.js
+  43.79 kB   dist\335.fe9ea089.async.js
+  42.38 kB   dist\634.935ee1b6.async.js
+  41.59 kB   dist\434.250ba799.async.js
+  15.88 kB   dist\709.b2bac049.async.js
+  13.59 kB   dist\631.57004400.async.js
+  11.16 kB   dist\77.10e65b79.async.js
+  10.22 kB   dist\782.a07865fa.async.js
+  8.58 kB    dist\958.cc1441a0.async.js
+  7.82 kB    dist\171.4c3f19a7.async.js
+  6.32 kB    dist\702.50005742.async.js
+  5.03 kB    dist\p__Career__Analytics__index.e908df6c.async.js
+  4.96 kB    dist\796.d5fc88de.async.js
+  3.7 kB     dist\p__Career__Courses__index.57814bc3.async.js
+  3.31 kB    dist\t__plugin-layout__Layout.c36cef4c.async.js
+  3.31 kB    dist\p__Career__Releases__index.fece2262.async.js
+  2.87 kB    dist\p__Career__System__index.67057350.async.js
+  2.49 kB    dist\p__Career__Scenes__index.aa3d2d46.async.js
+  2.46 kB    dist\p__Career__Questions__index.c713cecc.async.js
+  1.49 kB    dist\p__exception__404__index.ba780bc7.async.js
+  1.29 kB    dist\scripts\loading.js
+  618 B      dist\umi.c332ebdb.css
+  372 B      dist\t__plugin-layout__Layout.5012e1ab.chunk.css
+  220 B      dist\559.d23f74be.async.js
+
+event - Build index.html

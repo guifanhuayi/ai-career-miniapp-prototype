@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { ApiResult } from '../../../../../packages/contracts/client';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
+import { usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import {
   activeAnalysisKey,
@@ -14,6 +15,7 @@ import {
 type Analysis = ApiResult<'getAnalysisJob'>;
 const pending = (data: Analysis) => ['queued', 'running'].includes(data.status);
 export default function AnalysisPage() {
+  usePageView();
   const id = Taro.useRouter().params.analysisJobId ?? '';
   const [data, setData] = useState<Analysis>();
   const [selected, setSelected] = useState<string[]>([]);

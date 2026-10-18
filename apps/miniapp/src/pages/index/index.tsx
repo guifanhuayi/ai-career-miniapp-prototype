@@ -5,10 +5,12 @@ import fallbackIcon from '../../assets/prototype-icons/spark.png';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
 import LoadState from '../../components/LoadState';
+import { usePageView } from '../../services/analytics';
 import { api } from '../../services/api';
 import { useResource } from '../../services/useResource';
 
 export default function Home() {
+  usePageView();
   const { data, error, reload } = useResource(
     () => api('listScenes', { query: { pageSize: 100 } }),
     'home',

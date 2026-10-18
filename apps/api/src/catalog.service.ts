@@ -284,7 +284,9 @@ export class CatalogService {
       this.db.course.findMany({
         where,
         ...windowOf(query),
-        orderBy: [{ id: 'asc' }],
+        orderBy: admin
+          ? [{ updatedAt: 'desc' }, { id: 'desc' }]
+          : [{ id: 'asc' }],
         include: { mappings: true, mediaAsset: true },
       }),
       this.db.course.count({ where }),

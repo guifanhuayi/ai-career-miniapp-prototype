@@ -10,6 +10,8 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import { json } from 'express';
+import { AnalyticsModule } from './analytics/analytics.controller';
+import { AnalyticsReportService } from './analytics/analytics-report.service';
 import { CatalogModule } from './catalog.controller';
 import { loadLocalEnvironment, localConfig } from './config';
 import { CoreModule } from './core.module';
@@ -27,7 +29,13 @@ import { UploadRetentionRunner } from './jobs/upload-retention.runner';
 import { LearningModule } from './learning/learning.controller';
 
 @Module({
-  imports: [CoreModule, CatalogModule, JobsModule, LearningModule],
+  imports: [
+    CoreModule,
+    CatalogModule,
+    JobsModule,
+    LearningModule,
+    AnalyticsModule,
+  ],
   controllers: [FoundationController],
   providers: [
     {
@@ -228,6 +236,7 @@ export async function createApp(options: { startWorkers?: boolean } = {}) {
   if (options.startWorkers !== false) {
     app.get(AnalysisRunner).start();
     app.get(UploadRetentionRunner).start();
+    app.get(AnalyticsReportService).start();
   }
   const document = createDocument(app);
   SwaggerModule.setup('api/docs', app, document, {

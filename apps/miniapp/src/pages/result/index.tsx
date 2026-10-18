@@ -5,11 +5,13 @@ import { type Level, levelNames } from '../../../../../packages/domain/src';
 import ActionButton from '../../components/ActionButton';
 import LoadState from '../../components/LoadState';
 import ReviewDialog from '../../components/ReviewDialog';
+import { usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import { learningUrl, messageOf, startAttempt } from '../../services/learning';
 import { useResource } from '../../services/useResource';
 
 export default function Result() {
+  usePageView();
   const id = Taro.useRouter().params.attemptId ?? '';
   const {
     data: a,

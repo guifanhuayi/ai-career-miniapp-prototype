@@ -1,9 +1,11 @@
 import { Image, Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useEffect, useRef, useState } from 'react';
+import sample from '../../../../../packages/domain/fixtures/ocr/mock-jd-v1.json';
 import { characterCount, validJd } from '../../../../../packages/domain/src';
 import ActionButton from '../../components/ActionButton';
 import FormField from '../../components/FormField';
+import { usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import { imagePreview } from '../../services/images';
 import {
@@ -16,6 +18,7 @@ import {
 } from '../../services/jd-drafts';
 
 export default function Review() {
+  usePageView();
   const ocrId = Taro.useRouter().params.ocrJobId ?? '';
   const [draft, setDraft] = useState<JdDraft>(() => {
     const saved = readReviewDraft(ocrId) ?? readDraft('image');
@@ -161,6 +164,34 @@ export default function Review() {
         {characterCount(draft.text)}/8000字 · 分析只使用这份确认稿
       </Text>
       {error && <Text className="error">{error}</Text>}
+      {draft.source === 'fixture-confirmed' && (
+        <ActionButton
+          label="使用示例文字"
+          variant="secondary"
+          disabled={busy || loading || !ready}
+          onClick={() => {
+            if (lock.current) return;
+            lock.current = true;
+            setBusy(true);
+            void Taro.showModal({
+              title: '替换核对稿？',
+              content:
+                '仅恢复这张示例截图对应的模拟文字，将替换当前编辑内容；取消会保留原稿。',
+            })
+              .then((result) => {
+                if (result.confirm && alive.current)
+                  update({ ...draft, title: sample.title, text: sample.text });
+              })
+              .catch(() => {
+                if (alive.current) setError('未能打开确认，请重试；原稿保留。');
+              })
+              .finally(() => {
+                lock.current = false;
+                if (alive.current) setBusy(false);
+              });
+          }}
+        />
+      )}
       {!ready && !loading && (
         <ActionButton
           label="重新读取截图"

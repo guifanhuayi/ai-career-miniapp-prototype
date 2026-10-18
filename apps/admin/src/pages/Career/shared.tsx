@@ -81,6 +81,7 @@ export function ReleaseButton({
   };
   return (
     <Popconfirm
+      key={`${resource}:${id}:${version}:${status}`}
       title={`确认${label}当前版本？`}
       description="服务器将校验版本与发布规则，操作会保留审计记录。"
       onConfirm={submit}

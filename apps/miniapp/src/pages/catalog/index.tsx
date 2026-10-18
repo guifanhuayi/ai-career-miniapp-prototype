@@ -7,10 +7,12 @@ import { prototypeIcons } from '../../assets/prototype-icons';
 import fallbackIcon from '../../assets/prototype-icons/spark.png';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
+import { usePageView } from '../../services/analytics';
 import { api } from '../../services/api';
 
 const categories = ['全部', ...sceneCategories] as const;
 export default function Catalog() {
+  usePageView();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<(typeof categories)[number]>('全部');
   const [data, setData] = useState<ApiResult<'listScenes'>>();

@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 import type { ApiBody } from '../../../../packages/contracts/client';
+import { track } from './analytics';
 import { guestApi } from './api';
 
 export type InputFields = Omit<
@@ -75,12 +76,17 @@ export async function submitConfirmed(input: InputFields) {
           inputKey: saved.inputKey,
           analysisKey: saved.analysisKey,
           flowId: saved.flowId,
+          occurredAt:
+            typeof saved.occurredAt === 'string'
+              ? saved.occurredAt
+              : new Date().toISOString(),
         }
       : {
           signature,
           inputKey: clientId(),
           analysisKey: clientId(),
           flowId: clientId(),
+          occurredAt: new Date().toISOString(),
         };
   Taro.setStorageSync(submissionKey, request);
   Taro.setStorageSync(latestKey, signature);
@@ -95,6 +101,17 @@ export async function submitConfirmed(input: InputFields) {
     },
   });
   const current = Taro.getStorageSync(latestKey) === signature;
+  track('jd_submit', {
+    analysisJobId: analysis.id,
+    eventId: `submit-${analysis.id}`,
+    occurredAt: request.occurredAt,
+  });
+  if (input.uploadId)
+    track('ocr_result_confirmed', {
+      analysisJobId: analysis.id,
+      eventId: `ocr-${analysis.id}`,
+      occurredAt: request.occurredAt,
+    });
   if (current) Taro.setStorageSync(activeAnalysisKey, analysis.id);
   return { analysis, current };
 }

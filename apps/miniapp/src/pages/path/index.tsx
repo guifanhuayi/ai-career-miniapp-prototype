@@ -1,6 +1,6 @@
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   formatDuration,
   type Level,
@@ -10,11 +10,13 @@ import {
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
 import LoadState from '../../components/LoadState';
+import { track, usePageView } from '../../services/analytics';
 import { api, guestApi } from '../../services/api';
 import { messageOf, startAttempt } from '../../services/learning';
 import { useResource } from '../../services/useResource';
 
 export default function Path() {
+  usePageView();
   const id = Taro.useRouter().params.planId ?? '';
   const [page, setPage] = useState(1);
   const { data, error, reload } = useResource(async () => {
@@ -33,6 +35,17 @@ export default function Path() {
     return { plan, courses };
   }, `${id}:${page}`);
   const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    if (data?.plan.available && data.plan.selectedLevel && data.courses) {
+      if (data.courses.items.length) {
+        for (const course of data.courses.items)
+          track('recommendation_viewed', {
+            planId: data.plan.id,
+            courseId: course.id,
+          });
+      } else track('recommendation_viewed', { planId: data.plan.id });
+    }
+  }, [data]);
   const [actionError, setActionError] = useState('');
   const choose = async (level: Level) => {
     if (!data || busy) return;

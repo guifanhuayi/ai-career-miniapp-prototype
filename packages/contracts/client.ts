@@ -255,6 +255,16 @@ export const routes = {
     "path": "/api/v1/me/course-marks/{courseId}",
     "method": "DELETE",
     "successStatus": 200
+  },
+  "collectEvents": {
+    "path": "/api/v1/events",
+    "method": "POST",
+    "successStatus": 200
+  },
+  "getAnalyticsReport": {
+    "path": "/api/v1/admin/analytics",
+    "method": "GET",
+    "successStatus": 200
   }
 } as const;
 export type OperationName = keyof typeof routes;

@@ -39,6 +39,12 @@ export default defineConfig({
       icon: 'DashboardOutlined',
       component: './Career/System',
     },
+    {
+      path: '/analytics',
+      name: '行为与运营分析',
+      icon: 'BarChartOutlined',
+      component: './Career/Analytics',
+    },
     { path: '*', component: './exception/404' },
   ],
   model: {},

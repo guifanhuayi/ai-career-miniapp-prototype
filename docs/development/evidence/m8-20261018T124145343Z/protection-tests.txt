@@ -1,0 +1,19 @@
+$ node --test tests/prototype-preservation.test.mjs
+✔ ENG-003: eleven original files match the original or explicitly approved color/documentation baseline (3.5711ms)
+✔ DOC-001: README approval is scoped, original text is archived and subsequent changes are detected (398.4117ms)
+✔ THEME-001: only CSS color literals change across four authorized files; every script, text and layout rule is preserved (301.3116ms)
+✔ THEME-002: a later unauthorized color modification is still detected (2.2674ms)
+✔ THEME-003: approved blue buttons and orange emphasis meet text contrast (0.4555ms)
+✔ THEME-004: native navigation, miniapp tokens and icon generator use the same approved palette (0.5949ms)
+✔ ENG-004: a source content change is detected (2.1358ms)
+✔ ENG-005: deleting an original file is detected (1.5158ms)
+✔ ENG-006: checkout line endings are tolerated, content and BOM are preserved (0.2325ms)
+✔ ENG-007: filesystem errors do not silently become preservation success (0.4657ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1030.015

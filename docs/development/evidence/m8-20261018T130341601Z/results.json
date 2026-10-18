@@ -1,0 +1,123 @@
+{
+  "batch": "m8-20261018T130341601Z",
+  "startedAt": "2026-10-18T13:03:41.601Z",
+  "baseline": "d9d21ee07358f1668e0317804a965aaea804ff57",
+  "codeFingerprint": "a89ecb6e06c78ebd227f97ef948b2e27cc0c63d991fbf1cbf7e3a649c58f59d6",
+  "node": "24.19.0",
+  "packageManager": "pnpm@11.25.0",
+  "lockHash": "c37fd6a72abc537adb08b107b66ab8ee24ee4ab9380a6cb4741b875110e8816f",
+  "fixtureHash": "b69e31f20cfbce6ec36d8ba64b6939741b36fccb15300f0e7e431bdab883ea27",
+  "steps": [
+    {
+      "name": "frozen-install",
+      "exitCode": 0,
+      "durationMs": 528,
+      "evidence": "frozen-install.txt"
+    },
+    {
+      "name": "prisma-client",
+      "exitCode": 0,
+      "durationMs": 1681,
+      "evidence": "prisma-client.txt"
+    },
+    {
+      "name": "prototype",
+      "exitCode": 0,
+      "durationMs": 834,
+      "evidence": "prototype.txt"
+    },
+    {
+      "name": "protection-tests",
+      "exitCode": 0,
+      "durationMs": 1713,
+      "evidence": "protection-tests.txt"
+    },
+    {
+      "name": "static-check",
+      "exitCode": 0,
+      "durationMs": 690,
+      "evidence": "static-check.txt"
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 7144,
+      "evidence": "typecheck.txt"
+    },
+    {
+      "name": "test-script-types",
+      "exitCode": 0,
+      "durationMs": 3560,
+      "evidence": "test-script-types.txt"
+    },
+    {
+      "name": "admin-lint",
+      "exitCode": 0,
+      "durationMs": 2349,
+      "evidence": "admin-lint.txt"
+    },
+    {
+      "name": "admin-components",
+      "exitCode": 0,
+      "durationMs": 840,
+      "evidence": "admin-components.txt"
+    },
+    {
+      "name": "domain-tests",
+      "exitCode": 0,
+      "durationMs": 1263,
+      "evidence": "domain-tests.txt"
+    },
+    {
+      "name": "api-tests",
+      "exitCode": 0,
+      "durationMs": 73688,
+      "evidence": "api-tests.txt"
+    },
+    {
+      "name": "contract-drift",
+      "exitCode": 0,
+      "durationMs": 3202,
+      "evidence": "contract-drift.txt"
+    },
+    {
+      "name": "api-build",
+      "exitCode": 0,
+      "durationMs": 3042,
+      "evidence": "api-build.txt"
+    },
+    {
+      "name": "wechat-build",
+      "exitCode": 0,
+      "durationMs": 12585,
+      "evidence": "wechat-build.txt"
+    },
+    {
+      "name": "h5-build",
+      "exitCode": 0,
+      "durationMs": 21027,
+      "evidence": "h5-build.txt"
+    },
+    {
+      "name": "admin-build",
+      "exitCode": 0,
+      "durationMs": 21703,
+      "evidence": "admin-build.txt"
+    },
+    {
+      "name": "browser-tests",
+      "exitCode": 0,
+      "durationMs": 105202,
+      "evidence": "browser-tests.txt"
+    },
+    {
+      "name": "performance-baseline",
+      "exitCode": 0,
+      "durationMs": 21591,
+      "evidence": "performance-baseline.txt"
+    }
+  ],
+  "deferredTests": [],
+  "result": "passed",
+  "finishedAt": "2026-10-18T13:08:24.536Z"
+}

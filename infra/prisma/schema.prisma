@@ -9,6 +9,7 @@ model Visitor {
   id          String @id @default(uuid()) @db.Char(36)
   createdAt   DateTime @default(now()) @db.DateTime(3)
   environment String @db.VarChar(16)
+  firstLearningAt DateTime? @db.DateTime(3)
   credentials VisitorCredential[]
   plans       LearningPlan[]
   attempts    AssessmentAttempt[]
@@ -260,6 +261,14 @@ model BehaviorEvent {
   receivedAt   DateTime @default(now()) @db.DateTime(3)
   effectiveAt  DateTime @db.DateTime(3)
   clockAnomaly Boolean @default(false)
+  sceneId      String? @db.VarChar(32)
+  position     Float?
+  positionAnomaly Boolean @default(false)
+  marked       Boolean?
+  payloadHash  String? @db.Char(64)
+  schemaVersion Int @default(1)
+  appVersion   String @default("0.1.0") @db.VarChar(32)
+  @@index([visitorId, receivedAt, id])
   visitor      Visitor @relation(fields: [visitorId], references: [id])
   @@index([environment, effectiveAt, name])
   @@index([visitorId, flowId, taskId, effectiveAt])
@@ -293,6 +302,9 @@ model DailyAggregate {
   metrics     Json
   createdAt   DateTime @default(now()) @db.DateTime(3)
   @@id([day, environment])
+}
+model AnalyticsLock {
+  id Int @id
 }
 model IdempotencyRecord {
   scope       String @db.VarChar(40)

@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import type { ApiResult } from '../../../../../packages/contracts/client';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
+import { track, usePageView } from '../../services/analytics';
 import { api, guestApi } from '../../services/api';
 import { messageOf, openPlan, operationKey } from '../../services/learning';
 
 export default function Scene() {
+  usePageView();
   const query = Taro.useRouter().params;
   const sceneId = query.sceneId ?? '';
   const analysisJobId = query.analysisJobId;
@@ -36,7 +38,7 @@ export default function Scene() {
       const current = await guestApi('getLearningPlan', {
         path: { planId: created.id },
       });
-      await openPlan(current);
+      await openPlan(current, !!current.latestAttemptId);
     } catch (e) {
       setActionError(messageOf(e));
     } finally {
@@ -55,6 +57,7 @@ export default function Scene() {
       .then(([item, list]) => {
         if (current) {
           setScene(item);
+          track('scene_selected', { sceneId });
           setTasks(list.items);
         }
       })

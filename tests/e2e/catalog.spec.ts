@@ -217,6 +217,14 @@ test('M3-E06 ADM-002 MT-116/121: Pro creates a real draft, publishes to catalog 
 }) => {
   const title = `E2E自制测试课-${Date.now()}`;
   await page.goto(`${admin}/content/courses`);
+  await page
+    .getByLabel('搜索课程', { exact: true })
+    .fill('不匹配新课程的旧条件');
+  const filtered = page.waitForResponse(
+    (r) => r.url().includes('/admin/courses?') && r.url().includes('search='),
+  );
+  await page.getByLabel('搜索课程', { exact: true }).press('Enter');
+  await filtered;
   await page.getByRole('button', { name: '新建课程草稿' }).click();
   const dialog = page.getByRole('dialog', { name: '新建课程草稿' });
   await dialog.getByLabel('课程标题', { exact: true }).fill(title);

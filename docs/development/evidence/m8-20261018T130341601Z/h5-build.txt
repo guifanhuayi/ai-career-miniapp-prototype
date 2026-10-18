@@ -1,0 +1,356 @@
+$ pnpm --filter @career/miniapp build:h5
+$ taro build --type h5
+👽 Taro v4.3.0
+
+Tips:
+1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。
+
+
+
+
+● Webpack █████████████████████████  (0%)  
+ 
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 1/1 dependencie
+s 0/1 modules 1 active 
+ babel-loader › src\app.config.ts
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%)  
+ ...babel+c_5da1578df6f30ac7da0ee753b22cae28\node_modules\babel-loader\lib\ind
+ex.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%)  
+ ...0_@_403175723575bab0f9d762454d7c9ccf\node_modules\@tarojs\taro-loader\lib\
+h5.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 1/2 dependencie
+s 0/1 modules 1 active 
+ babel-loader › src\app.config.ts
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 18/33 dependenc
+ies 0/17 modules 17 active 
+ babel-loader › src\pages\catalog\index.tsx
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 120/203 depende
+ncies 3/36 modules 15 active 
+ ..\..\node_modules\.pnpm\react@18.3.1\node_modules\react\index.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 178/203 depende
+ncies 3/48 modules 45 active 
+ ...c9d7c9bfcb63f5eb5bf\node_modules\@tarojs\plugin-framework-react\dist\runti
+me.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 233/264 depende
+ncies 8/52 modules 41 active 
+ css-loader › postcss-loader › less-loader › src\app.less
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%)  
+ ...postcs_a0bd507555ccc16649a501f45639cee4\node_modules\postcss-loader\dist\c
+js.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 259/293 depende
+ncies 13/66 modules 52 active 
+ css-loader › postcss-loader › less-loader › src\app.less
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 289/342 depende
+ncies 15/94 modules 78 active 
+ ...9c59f04811\node_modules\@tarojs\plugin-platform-h5\dist\runtime\apis\taro-
+h5.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 301/379 depende
+ncies 40/102 modules 55 active 
+ ...s\.pnpm\react@18.3.1\node_modules\react\cjs\react-jsx-runtime.production.m
+in.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 411/498 depende
+ncies 57/194 modules 51 active 
+ babel-loader › ..\..\packages\domain\src\analytics.ts
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 489/503 depende
+ncies 64/264 modules 98 active 
+ ...35c0b347cdc1\node_modules\@tarojs\components\dist\components\taro-audio-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 500/537 depende
+ncies 65/266 modules 126 active 
+ ...de_modules\@tarojs\components\dist\components\taro-inline-payment-panel-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 861/948 depende
+ncies 85/301 modules 107 active 
+ ...35c0b347cdc1\node_modules\@tarojs\components\dist\components\taro-label-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 901/948 depende
+ncies 85/303 modules 157 active 
+ ...f35c0b347cdc1\node_modules\@tarojs\components\dist\components\taro-slot-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (10%) 0/1 entries 902/1000 depend
+encies 85/303 modules 158 active 
+ ...0b347cdc1\node_modules\@tarojs\components\dist\components\taro-snapshot-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1165/1259 depen
+dencies 91/310 modules 153 active 
+ ...cdc1\node_modules\@tarojs\components\dist\components\taro-sticky-header-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1257/1291 depen
+dencies 92/311 modules 168 active 
+ ...f35c0b347cdc1\node_modules\@tarojs\components\dist\components\taro-view-co
+re.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1364/1400 depen
+dencies 92/313 modules 221 active 
+ ...47cdc1\node_modules\@tarojs\components\dist\taro-components\taro-component
+s.css
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1466/1484 depen
+dencies 116/318 modules 198 active 
+ ...m\@tarojs+runtime@4.3.0\node_modules\@tarojs\runtime\dist\dom\anchor-eleme
+nt.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1650/1713 depen
+dencies 133/432 modules 192 active 
+ ...untime@4.3.0\node_modules\@tarojs\runtime\dist\dom-external\inner-html\sty
+le.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (11%) 0/1 entries 1742/1800 depen
+dencies 157/492 modules 259 active 
+ ...efe973adee7f0ef3fb3bbdc\node_modules\@tarojs\taro-h5\dist\api\open-api\ind
+ex.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (12%) 0/1 entries 1935/1985 depen
+dencies 235/504 modules 208 active 
+ ...3fdefe973adee7f0ef3fb3bbdc\node_modules\@tarojs\taro-h5\dist\api\network\u
+dp.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (12%) 0/1 entries 2000/2075 depen
+dencies 240/530 modules 256 active 
+ ...p-prototype\node_modules\.pnpm\lodash-es@4.17.21\node_modules\lodash-es\ke
+ys.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (12%) 0/1 entries 2044/2100 depen
+dencies 258/535 modules 239 active 
+ ....pnpm\@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\exten
+ds.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (13%) 0/1 entries 2103/2159 depen
+dencies 291/538 modules 247 active 
+ ...-prototype\node_modules\.pnpm\lodash-es@4.17.21\node_modules\lodash-es\isN
+il.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (13%) 0/1 entries 2121/2191 depen
+dencies 297/555 modules 242 active 
+ ...node_modules\.pnpm\lodash-es@4.17.21\node_modules\lodash-es\_baseAssignVal
+ue.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (13%) 0/1 entries 2237/2253 depen
+dencies 337/570 modules 232 active 
+ ...ototype\node_modules\.pnpm\query-string@9.5.1\node_modules\query-string\ba
+se.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (14%) 0/1 entries 2241/2273 depen
+dencies 444/572 modules 127 active 
+ ...\node_modules\.pnpm\lodash-es@4.17.21\node_modules\lodash-es\_defineProper
+ty.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (15%) 0/1 entries 2294/2307 depen
+dencies 482/597 modules 114 active 
+ ...ules\.pnpm\style-inject@0.3.0\node_modules\style-inject\dist\style-inject.
+es.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (15%) 0/1 entries 2355/2366 depen
+dencies 495/635 modules 139 active 
+ ...@tarojs+runtime@4.3.0_@tarojs+shared@4.3.0\node_modules\@tarojs\api\dist\e
+nv.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (15%) 0/1 entries 2395/2401 depen
+dencies 540/648 modules 108 active 
+ ...node_modules\.pnpm\jsonp-retry@1.0.3\node_modules\jsonp-retry\dist\jsonp.e
+sm.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (16%) 0/1 entries 2430/2433 depen
+dencies 626/667 modules 41 active 
+ ..\..\node_modules\.pnpm\ics@3.12.1\node_modules\ics\dist\pipeline\build.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (17%) 0/1 entries 2462/2466 depen
+dencies 649/688 modules 39 active 
+ ...type\node_modules\.pnpm\nanoid@3.3.20\node_modules\nanoid\url-alphabet\ind
+ex.js
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ building (17%) 0/1 entries 2466/2470 depen
+dencies 654/690 modules 36 active 
+ css-loader › postcss-loader › less-loader › src\app.less|0|||}}
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (70%)  
+ plugins
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (78%)  
+ chunk modules optimization
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (88%)  
+ runtime requirements
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ CssMinimizerPlugin
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ HtmlWebpackPlugin
+
+- 即将开始启动编译，请稍等~
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ RealContentHashPlugin
+
+- 即将开始启动编译，请稍等~
+
+√ Webpack
+  Compiled successfully in 15.56s
+
+- 即将开始启动编译，请稍等~
+⚠️ Warnings: 
+
+AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  js/app.js (261 KiB)
+
+EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (372 KiB)
+      js/675.js
+      css/app.css
+      js/app.js
+
+⚠️  编译警告. 2026/10/18 21:05:55
+
+AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  js/app.js (261 KiB)
+
+EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (372 KiB)
+      js/675.js
+      css/app.css
+      js/app.js
+
+assets by path chunk/*.js 604 KiB
+  asset chunk/747.js 82.8 KiB [emitted] [minimized] 1 related asset
+  asset chunk/838.js 79.2 KiB [emitted] [minimized] 1 related asset
+  asset chunk/683.js 58.5 KiB [emitted] [minimized]
+  + 12 assets
+assets by path static/images/assets/ 43.7 KiB
+  asset static/images/assets/jd-example.png 32.7 KiB [emitted] [from: src/assets/jd-example.png]
+  asset static/images/assets/prototype-icons/clock.png 2.61 KiB [emitted] [from: src/assets/prototype-icons/clock.png]
+  asset static/images/assets/prototype-icons/shield.png 2.25 KiB [emitted] [from: src/assets/prototype-icons/shield.png]
+  + 3 assets
+assets by path js/*.js 365 KiB
+  asset js/app.js 261 KiB [emitted] [minimized] [big] (name: app) 1 related asset
+  asset js/675.js 104 KiB [emitted] [minimized] (id hint: taro) 1 related asset
+asset css/app.css 6.16 KiB [emitted] [minimized] (name: app)
+asset index.html 747 bytes [emitted]
+Entrypoint app [big] 372 KiB = js/675.js 104 KiB css/app.css 6.16 KiB js/app.js 261 KiB
+
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  js/app.js (261 KiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (372 KiB)
+      js/675.js
+      css/app.css
+      js/app.js
+
+
+webpack 5.91.0 compiled with 2 warnings in 15570 ms
+

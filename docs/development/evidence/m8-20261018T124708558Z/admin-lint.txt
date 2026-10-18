@@ -1,0 +1,4 @@
+$ pnpm run biome:lint && pnpm run tsc
+$ biome lint
+Checked 283 files in 73ms. No fixes applied.
+$ tsc --noEmit

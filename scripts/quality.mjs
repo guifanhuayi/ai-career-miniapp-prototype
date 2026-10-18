@@ -90,6 +90,20 @@ const steps = [
   ['h5-build', ['h5:build']],
   ['admin-build', ['admin:build']],
   ['browser-tests', ['test:e2e']],
+  ...(phase === 'm8'
+    ? [
+        [
+          'performance-baseline',
+          [
+            'exec',
+            'tsx',
+            '--tsconfig',
+            'apps/api/tsconfig.json',
+            'scripts/benchmark-local.ts',
+          ],
+        ],
+      ]
+    : []),
 ];
 for (const [name, args] of steps) {
   const stepStart = Date.now();

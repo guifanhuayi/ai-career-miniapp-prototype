@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { type Level, levelNames } from '../../../../../packages/domain/src';
 import ActionButton from '../../components/ActionButton';
 import LoadState from '../../components/LoadState';
+import { track, usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import { messageOf, openPlan } from '../../services/learning';
 import { useResource } from '../../services/useResource';
 
 export default function Plans() {
+  usePageView();
   const [page, setPage] = useState(1);
   const [analysisPage, setAnalysisPage] = useState(1);
   const { data, error, reload } = useResource(
@@ -79,11 +81,12 @@ export default function Plans() {
                     <ActionButton
                       label={`继续最近课程：${p.taskName}`}
                       variant="link"
-                      onClick={() =>
+                      onClick={() => {
+                        track('learning_plan_resumed', { planId: p.id });
                         void Taro.navigateTo({
                           url: `/pages/course/index?planId=${p.id}&courseId=${encodeURIComponent(p.lastCourseId!)}`,
-                        })
-                      }
+                        });
+                      }}
                     />
                   )}
                 </View>

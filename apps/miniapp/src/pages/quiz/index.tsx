@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
 import LoadState from '../../components/LoadState';
+import { usePageView } from '../../services/analytics';
 import { guestApi } from '../../services/api';
 import { messageOf, operationKey } from '../../services/learning';
 import { useResource } from '../../services/useResource';
 
 export default function Quiz() {
+  usePageView();
   const id = Taro.useRouter().params.attemptId ?? '';
   const {
     data: a,

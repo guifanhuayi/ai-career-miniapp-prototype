@@ -583,6 +583,7 @@ export class LearningService {
         visitorId,
         environment,
         name: 'course_mark_changed',
+        marked,
         flowId: randomUUID(),
         courseId,
       });

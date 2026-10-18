@@ -273,7 +273,7 @@ export class ContentAdminController {
   @Operation(
     'listAdminCourses',
     '维护课程草稿与发布',
-    '未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。',
+    '未知/无效/超35分钟可存草稿，发布前实际校验。媒体和来源网页分开。管理列表按updatedAt/id倒序，新建/修改后可定位；公共目录仍按id稳定排序。',
   )
   courses(@Query(new DtoPipe(AdminQuery)) query: AdminQuery) {
     return this.catalog.courses(query, true);

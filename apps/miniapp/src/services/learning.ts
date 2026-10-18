@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro';
 import type { ApiResult } from '../../../../packages/contracts/client';
+import { track } from './analytics';
 import { guestApi } from './api';
 
 export function operationKey(scope: string) {
@@ -26,8 +27,12 @@ export async function startAttempt(planId: string) {
   clearOperation(scope);
   return current;
 }
-export async function openPlan(p: ApiResult<'getLearningPlan'>) {
+export async function openPlan(
+  p: ApiResult<'getLearningPlan'>,
+  resumed = true,
+) {
   if (!p.available) throw new Error('任务已下架，历史记录仍保留。');
+  if (resumed) track('learning_plan_resumed', { planId: p.id });
   if (p.latestAttemptId && p.latestAttemptStatus === 'draft')
     return Taro.navigateTo({
       url: `/pages/quiz/index?attemptId=${p.latestAttemptId}`,
