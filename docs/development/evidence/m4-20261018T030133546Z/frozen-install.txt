@@ -1,0 +1,11 @@
+Scope: all 5 workspace projects
+✓ Lockfile passes supply-chain policies (verified 24s ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+apps/admin prepare$ max setup
+apps/admin prepare: info  - [你知道吗？] 如果想预览构建后产物, 可尝试 max preview，详见 https://umijs.org/docs/api/commands#preview
+apps/admin prepare: info  - generate files
+apps/admin prepare: info  - Preparing...
+apps/admin prepare: Done
+Done in 4.1s using pnpm v11.25.0

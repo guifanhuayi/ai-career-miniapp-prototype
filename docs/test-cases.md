@@ -164,6 +164,10 @@
 
 本表不等于各MT整项均已验收：原生相册取消与预览、真实设备/大字体等待D08；完整学习闭环及行为分析等待后续阶段。截图24小时失效与物理清理运行边界见审查，不声称停机仍自动删除。
 
+### 本地直接启动回归追加
+
+ENG-008：`tests/domain/runtime-dependencies.test.ts`在独立Node子进程中清除NODE_PATH，从API包上下文真实导入Express并验证json函数。先复现未声明直接依赖导致失败，声明已安装的5.2.1后通过；初次完整检查发现CommonJS测试定位写法不兼容，修正后重新执行。最终报告见[运行修复审查](development/runtime-preview-review.md)。此用例不将服务可启动等同为完整产品验收。
+
 ```text
 执行ID：
 日期/时区：
