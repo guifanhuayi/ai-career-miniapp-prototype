@@ -16,6 +16,7 @@
     "db:generate": "node --env-file=infra/runtime/local.env node_modules/prisma/build/index.js generate --schema infra/prisma/schema.prisma",
     "db:migrate": "node --env-file=infra/runtime/local.env node_modules/prisma/build/index.js migrate deploy --schema infra/prisma/schema.prisma",
     "db:seed": "tsx --tsconfig apps/api/tsconfig.json infra/seed.ts",
+    "media:generate": "node scripts/generate-media.mjs",
     "api:dev": "pnpm --filter @career/api dev",
     "api:build": "pnpm --filter @career/api build",
     "miniapp:build": "pnpm --filter @career/miniapp build:weapp",
@@ -32,8 +33,11 @@
     "@types/node": "24.19.2",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
+    "ffmpeg-static": "5.3.0",
+    "ffprobe-static": "3.1.0",
     "openapi-typescript": "7.13.0",
     "prisma": "6.19.3",
+    "reflect-metadata": "0.2.2",
     "tsx": "4.23.15",
     "typescript": "5.9.3"
   }

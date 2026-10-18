@@ -10,6 +10,30 @@ export default defineConfig({
   routes: [
     { path: '/', redirect: '/system' },
     {
+      path: '/content/scenes',
+      name: '场景与任务',
+      icon: 'AppstoreOutlined',
+      component: './Career/Scenes',
+    },
+    {
+      path: '/content/courses',
+      name: '课程内容',
+      icon: 'ReadOutlined',
+      component: './Career/Courses',
+    },
+    {
+      path: '/content/questions',
+      name: '模拟题库',
+      icon: 'FormOutlined',
+      component: './Career/Questions',
+    },
+    {
+      path: '/content/releases',
+      name: '发布审计',
+      icon: 'AuditOutlined',
+      component: './Career/Releases',
+    },
+    {
       path: '/system',
       name: '工程状态',
       icon: 'DashboardOutlined',

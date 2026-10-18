@@ -7,3 +7,24 @@ page, body { background: @paper; color: @ink; font-family: -apple-system, BlinkM
 .card { background: @surface; border: 1px solid @border; border-radius: 18px; padding: 20px; margin: 20px 0; }
 .primary { width: 100%; min-height: 48px; border: 0; padding: 8px 16px; background: @primary; color: @surface; border-radius: 12px; font-size: 15px; }
 .error { color: @dark; background: @mint; padding: 14px; border-radius: 10px; margin: 12px 0; display: block; }
+.green { color: @primary; }
+.searchbox { background: @surface; border: 1px solid @border; border-radius: 12px; padding: 14px; margin: 20px 0 16px; }
+.searchbox input { width: 100%; font-size: 14px; color: @ink; background: transparent; }
+.chips { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; margin-bottom: 22px; padding: 2px 0; }
+.chip { flex-shrink: 0; white-space: nowrap; margin: 0; padding: 8px 13px; border: 1px solid @border; border-radius: 8px; background: @surface; color: @muted; font-size: 13px; line-height: 1.4; }
+.chip.selected { background: @dark; border-color: @dark; color: @surface; font-weight: 650; }
+.catalog-count { color: @muted; font-size: 12px; display: block; line-height: 1.6; }
+.catalog-row, .choice { width: 100%; text-align: left; color: @ink; border: 1px solid @border; border-radius: 16px; padding: 18px; background: @surface; margin: 12px 0; white-space: normal; font-size: 15px; line-height: 1.5; box-sizing: border-box; }
+.catalog-row { display: flex; align-items: center; gap: 14px; }
+.catalog-body { flex: 1; min-width: 0; }
+.tile-icon { width: 36px; height: 36px; min-width: 36px; border-radius: 10px; background: #edf4e8; display: flex; align-items: center; justify-content: center; }
+.line-icon { width: 20px; height: 20px; display: block; }
+.choice { display: flex; align-items: flex-start; gap: 12px; }
+.task-radio { width: 17px; height: 17px; min-width: 17px; box-sizing: border-box; border: 1px solid #cad7bd; border-radius: 50%; margin-top: 4px; }
+.choice.selected .task-radio { border: 5px solid #36764a; }
+.row-title { display: block; font-weight: 650; font-size: 16px; line-height: 1.6; }
+.catalog-row .description, .choice .description { font-size: 13px; margin: 6px 0 10px; line-height: 1.7; }
+.row-arrow { color: @primary; font-size: 24px; }
+.choice.selected { border-color: @primary; background: @mint; }
+.deliverable { margin: 20px 0; background: @mint; padding: 18px; border-radius: 14px; }
+.chip::after, .choice::after, .catalog-row::after { border: 0; }

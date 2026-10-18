@@ -1,0 +1,38 @@
+$ pnpm --filter @career/domain typecheck && pnpm --filter @career/api typecheck && pnpm --filter @career/miniapp typecheck
+$ tsc --noEmit
+$ tsc --noEmit
+$ tsc --noEmit
+src/assets/prototype-icons/index.ts(3,19): error TS2307: Cannot find module './arrow.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(4,19): error TS2307: Cannot find module './award.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(5,18): error TS2307: Cannot find module './back.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(6,18): error TS2307: Cannot find module './book.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(7,17): error TS2307: Cannot find module './bot.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(8,23): error TS2307: Cannot find module './briefcase.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(9,19): error TS2307: Cannot find module './check.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(10,21): error TS2307: Cannot find module './chevron.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(11,19): error TS2307: Cannot find module './clock.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(12,18): error TS2307: Cannot find module './code.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(13,22): error TS2307: Cannot find module './external.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(14,18): error TS2307: Cannot find module './file.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(15,18): error TS2307: Cannot find module './grid.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(16,18): error TS2307: Cannot find module './home.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(17,19): error TS2307: Cannot find module './image.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(18,20): error TS2307: Cannot find module './layers.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(19,18): error TS2307: Cannot find module './link.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(20,21): error TS2307: Cannot find module './message.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(21,17): error TS2307: Cannot find module './mic.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(22,18): error TS2307: Cannot find module './plug.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(23,26): error TS2307: Cannot find module './presentation.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(24,19): error TS2307: Cannot find module './route.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(25,20): error TS2307: Cannot find module './search.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(26,20): error TS2307: Cannot find module './shield.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(27,19): error TS2307: Cannot find module './spark.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(28,19): error TS2307: Cannot find module './table.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(29,19): error TS2307: Cannot find module './video.png' or its corresponding type declarations.
+src/assets/prototype-icons/index.ts(30,22): error TS2307: Cannot find module './workflow.png' or its corresponding type declarations.
+src/pages/catalog/index.tsx(106,19): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+D:\Codex workspace\Product\ai-career-miniapp-prototype\apps\miniapp:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @career/miniapp@0.1.0 typecheck: `tsc --noEmit`
+Exit status 2
+[ELIFECYCLE] Command failed with exit code 2.

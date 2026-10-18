@@ -30,3 +30,16 @@ test('M2-015 MT-065: every mock set contains two common/two scene questions with
     }
   }
 });
+
+test('M3-C03 ADM-002: mock editor slot labels follow frozen first/fourth common questions', () => {
+  const commonReview = 'AI 给出了看起来很完整的结果，你会如何确认它可用？';
+  for (const scene of content) {
+    assert.equal(
+      scene.questions[0]!.title,
+      `开始“${scene.name}”任务前，最应该先明确什么？`,
+    );
+    assert.equal(scene.questions[3]!.title, commonReview);
+    assert.notEqual(scene.questions[1]!.title, commonReview);
+    assert.notEqual(scene.questions[2]!.title, commonReview);
+  }
+});

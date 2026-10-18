@@ -1,0 +1,42 @@
+$ tsx --tsconfig apps/api/tsconfig.json --test --test-concurrency=1 tests/integration/*.test.ts
+✔ M3-001 CAT-001: all17 scenes/36 stable tasks/168 topics match preserved prototype; public payloads contain no answers (514.5178ms)
+✔ M3-002 CAT-001/002 MT-053/054: search task/id/case/trim and category intersection with real empty states (68.7761ms)
+✔ M3-003 API-003: invalid pagination/filter/unknown bypass params fail400 and query enums are documented (64.0557ms)
+✔ M3-004 AUTH-002: every admin route is guarded; origin cannot bypass content writes (121.0565ms)
+✔ M3-005 ADM-003: optimistic scene/task editing, stale409 and atomic audit snapshot (102.8703ms)
+✔ M3-006 API-003: missing nested syllabus/unknown state/prototype keys never silently pass or500 (37.4406ms)
+✔ M3-007 ADM-002: draft creation is idempotent across concurrent requests, conflicts409 without duplicate course/audit (57.7266ms)
+✔ M3-008 ADM-002 COURSE-002: publish verifies actual3s file; same release retry returns same audit; archive closes detail (183.7839ms)
+✔ M3-009 ADM-002 MT-117: unknown/zero/negative/over35/fractional-over durations can stay draft but never publish or bypass detail (245.3038ms)
+✔ M3-010 COURSE-002: authorization/media/test-marker/chapter/mapping rules reject incomplete publications and invalid links (419.6145ms)
+✔ M3-011 ADM-002: editing a published course cannot relax actual media policy and stale edits never overwrite (176.09ms)
+✔ M3-012 CAT-001 COURSE-002: unpublishing parent scene/task blocks public catalog, course and media mappings (135.5323ms)
+✔ M3-013 MEDIA-001: controlled native MP4 serves valid Range206, safe416 and no arbitrary paths (120.7896ms)
+✔ M3-014 MEDIA-001: file integrity/hash/path/actual duration mismatch fails publication without reading external paths (174.8918ms)
+✔ M3-015 ADM-002: mock question versions immutable after publication, retries stable, no overwrite of old version (140.9406ms)
+✔ M3-016 ADM-002: malformed mock content and unapproved real question set rejected (26.352ms)
+﹣ M3-017 COURSE-006: real2099/2100 accepted and2100.1/2101 rejected (0.1954ms) # 边界视频生成命令未获执行许可；不能用声明时长冒充实播测试
+✔ M3-018 API-001/003: remaining admin list schemas, documented filters, canonical missing resources and safe nested errors (70.2466ms)
+✔ M2-001 DB-001: migration applies to isolated real MySQL8.4 (137.9833ms)
+✔ M2-002 GUEST-001 AUTH-002 MT-017/128: anonymous issuance stores only unpredictable credential digest (46.8821ms)
+✔ M2-003 API-003: reject unknown owner/environment fields and malformed body (26.7269ms)
+✔ M2-004 AUTH-002: missing/forged credential rejected; valid me is read-only (34.5021ms)
+✔ M2-005 LOCAL-ADMIN-001: local admin rejects absent header and foreign Origin/Host (15.1575ms)
+✔ M2-006 API-003: oversized JSON rejected with safe413 response (7.1604ms)
+✔ M2-007 API-001 MT-125: every implemented operation has success/security/error schemas (21.8482ms)
+✔ M2-008 EVT-004 MT-129: request metrics redact body, tokens, query and invalid correlation IDs (37.6806ms)
+✔ M2-009 DB-002: nested credential uniqueness failure rolls back visitor creation (21.2097ms)
+✔ M2-010 PLAN-001: closing/recreating API preserves visitor in MySQL (36.0712ms)
+✔ M2-016 DB-001: repeated seed preserves editorial changes and visitor records (1763.5344ms)
+✔ M2-017 API-003: valid non-UUID correlation ID is preserved consistently with Swagger (16.3482ms)
+✔ M2-018 API-003: visitor creation throttles burst with429 and Retry-After (288.5578ms)
+✔ M2-019 API-001: actual success/error responses validate against every current OpenAPI operation (87.131ms)
+✔ M2-020 API-003 EVT-004: injected database failure returns safe500 without internal diagnostic data (6.8752ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 11387.3259

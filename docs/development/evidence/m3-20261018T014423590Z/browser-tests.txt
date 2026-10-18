@@ -1,0 +1,22 @@
+$ playwright test
+[WebServer] (node:17836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:46544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:43172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\catalog.spec.ts:6:5 › M3-E01 CAT-001/002: real directory search/category intersection/empty reset/task selection (2.7s)
+  ok  2 tests\e2e\catalog.spec.ts:48:5 › M3-E02 CAT-002: loading failure is not an empty result; retry recovers and slow stale search cannot replace latest (2.3s)
+  ok  3 tests\e2e\catalog.spec.ts:81:5 › M3-E03 VIS-001: original green catalog/icons and readable narrow layouts at320/393/430 (3.5s)
+  ok  4 tests\e2e\catalog.spec.ts:112:5 › M3-E04 ADM-003 MT-120/124: Pro edit cancel preserves content; real save updates H5; stale version shows409 inside form (7.0s)
+  ok  5 tests\e2e\catalog.spec.ts:185:5 › M3-E05 ADM-002/003: course/question forms retain template style and required validation; release audit real (3.8s)
+  ok  6 tests\e2e\catalog.spec.ts:215:5 › M3-E06 ADM-002 MT-116/121: Pro creates a real draft, publishes to catalog and archives with audit (3.8s)
+  ok  7 tests\e2e\engineering.spec.ts:4:5 › M2-E01: H5 connects to MySQL API and restores one anonymous visitor after reload (388ms)
+  ok  8 tests\e2e\engineering.spec.ts:29:5 › M2-E02: H5 request failure is visible and retry recovers without resetting visitor (391ms)
+  ok  9 tests\e2e\engineering.spec.ts:39:5 › M2-E03: official Pro status page reads guarded API and reports backend failure truthfully (1.5s)
+  ok 10 tests\e2e\engineering.spec.ts:64:5 › M2-E04: approved green tokens and393reference typography survive H5 scaling with no narrow-screen overflow (626ms)
+
+  10 passed (29.2s)

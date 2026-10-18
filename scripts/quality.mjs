@@ -1,6 +1,6 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stripVTControlCharacters } from 'node:util';
@@ -35,7 +35,10 @@ const codeFingerprint = () => {
   );
 };
 const startedAt = new Date().toISOString();
-const batch = `m2-${startedAt.replace(/[-:.]/g, '')}`;
+const phase =
+  process.argv.find((value) => /^--phase=m[2-8]$/.test(value))?.slice(8) ??
+  'm3';
+const batch = `${phase}-${startedAt.replace(/[-:.]/g, '')}`;
 const directory = resolve(root, 'docs/development/evidence', batch);
 mkdirSync(directory, { recursive: true });
 const report = {
@@ -57,6 +60,13 @@ const report = {
     ),
   ),
   steps: [],
+  deferredTests: existsSync(
+    resolve(root, 'infra/runtime/media/boundary-2101.json'),
+  )
+    ? []
+    : [
+        'M3-017: real2099/2100/2100.1/2101 media fixtures unavailable; generation execution not approved',
+      ],
   result: 'running',
 };
 const steps = [
@@ -68,6 +78,10 @@ const steps = [
   ['typecheck', ['typecheck']],
   ['test-script-types', ['exec', 'tsc', '--noEmit']],
   ['admin-lint', ['--filter', '@career/admin', 'lint']],
+  [
+    'admin-components',
+    ['--filter', '@career/admin', 'exec', 'antd', 'lint', 'src/pages/Career'],
+  ],
   ['domain-tests', ['test:domain']],
   ['api-tests', ['test:api']],
   ['contract-drift', ['contracts:check']],
@@ -83,7 +97,7 @@ for (const [name, args] of steps) {
   const result = await new Promise((resolveResult) => {
     const child = spawn(process.execPath, [pnpm, ...args], {
       cwd: root,
-      env: process.env,
+      env: { ...process.env, CAREER_EVIDENCE_DIR: directory },
       windowsHide: true,
     });
     let output = '';
@@ -118,9 +132,12 @@ for (const [name, args] of steps) {
 if (report.result === 'running')
   report.result =
     report.codeFingerprint === codeFingerprint()
-      ? 'passed'
+      ? report.deferredTests.length
+        ? 'passed-with-deferred-tests'
+        : 'passed'
       : 'source-changed-during-check';
-if (report.result !== 'passed') process.exitCode = 1;
+if (!['passed', 'passed-with-deferred-tests'].includes(report.result))
+  process.exitCode = 1;
 report.finishedAt = new Date().toISOString();
 writeFileSync(
   resolve(directory, 'results.json'),

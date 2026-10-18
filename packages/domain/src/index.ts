@@ -1,4 +1,13 @@
 export const levels = ['beginner', 'intermediate', 'advanced'] as const;
+export const sceneCategories = [
+  'AI基础',
+  '工具连接',
+  'AI开发',
+  '办公表达',
+  '求职准备',
+  '内容设计',
+] as const;
+export const contentStatuses = ['draft', 'published', 'archived'] as const;
 export type Level = (typeof levels)[number];
 export const levelNames: Record<Level, string> = {
   beginner: '初阶',

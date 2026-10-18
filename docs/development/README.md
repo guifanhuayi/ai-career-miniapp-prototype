@@ -1,6 +1,6 @@
 # 开发运行与执行基线
 
-当前进入M2工程基线，按`miniapp_plan.md`、`phase-one-decisions.md`及产品/测试手册执行。用户已于2026-10-18授权开发。原型11文件保留；正式工程位于`apps/`。此时工程验证入口不是产品首页，不能作为完整业务系统交付。
+当前已完成M2工程基线，M3内容管理与目录已实现并进入验收，按`miniapp_plan.md`、`phase-one-decisions.md`及产品/测试手册执行。用户已于2026-10-18授权开发。原型11文件保留；正式工程位于`apps/`。工程验证入口不是产品首页，当前不是完整业务系统交付。
 
 ## 固定环境与首次启动
 
@@ -15,6 +15,7 @@ pnpm install --frozen-lockfile
 docker compose --env-file infra/runtime/local.env -f infra/compose.yaml up -d --wait
 pnpm db:generate
 pnpm db:migrate
+pnpm media:generate
 pnpm db:seed
 pnpm api:build
 pnpm miniapp:build
@@ -33,8 +34,11 @@ pnpm local:preview
 
 ## 业务、模拟与身份边界
 
-- 当前实现4个基础operation：服务健康、本地管理状态、自动签发匿名访客、读取本人访客。其余业务资源即使已有表结构，也不代表功能已经实现。
-- 17场景、36任务、168知识点从受保护原型只读提取，模拟题库`mock-question-set-v1`每场景4题。种子只创建缺项，不覆盖运营修改，不生成访客成绩/学习记录或虚假课程媒体。
+- 当前实现27个operation：4个基础接口、6个公开目录/课程/受控媒体接口、17个本地内容管理接口。后台入口`/content/scenes`、`/content/courses`、`/content/questions`、`/content/releases`；小程序从工程入口进入目录。岗位、计划、测验、进度及行为分析尚未开放，建表不等于实现。
+- 17场景、36任务、168知识点从受保护原型只读提取，模拟题库`mock-question-set-v1`每场景4题（第1/4题通用，第2/3题场景）。种子只创建缺项，不覆盖运营修改，不生成访客成绩/学习记录。`media:generate`制作并核验本项目自制3秒纯色测试片；seed在该媒体存在时创建51门显式测试课，覆盖17场景三级目录。它们不是教学课程。
+- 媒体文件和探测清单位于忽略的`infra/runtime/media`；不提交视频或私人上传。受控媒体通过实际文件哈希、体积、ffprobe时长校验；来源HTTPS网页与媒体分离，网页不能充当播放器地址。发布须满足授权、章节总和、有效关联以及`0<实际秒数<=2100`，草稿允许未配置时长/媒体；发布后的编辑同样校验。已发布题库禁止改题，只能建新版本。
+- 管理编辑使用version/revision乐观锁；旧版本409，发布/下架及创建使用持久幂等键。审计与内容变更同事务，创建结果Location可重读，操作审计不伪造已认证管理员身份、不包含JD或凭据。目录支持稳定分页/中文任务词/英文ID/分类交集，错误和真空结果分别显示。
+- 小程序目录与任务页复用原型绿色Token和原始SVG路径生成的PNG图标；`scripts/generate-icons.mjs`可用本机Edge重新渲染素材。保留原型横滑分类与单选任务。当前仅选择任务，尚不宣称已保存学习计划；测验、课程业务页与A首页随M4/M5接入。
 - `career_local`用于开发；`career_test`专供自动化，不复制真实用户数据。首次建卷时初始化SQL创建测试库；当前机器已用同样SQL初始化。测试迁移仅对测试库执行，测试不清空开发库。
 - 匿名凭据由服务端生成32字节随机值，库中只保留SHA256摘要。客户端统一请求入口保存凭据；无登录、微信身份交换、平台绑定和虚拟管理员。清存储/换设备不承诺恢复。
 - 本地API只接受回环监听配置，Host校验防止外部域名访问；管理API还要求`X-Admin-Local: 1`及允许的Origin。生产/公网模式启动即拒绝，D08之前不变通开放。
@@ -45,7 +49,9 @@ pnpm local:preview
 
 统一生成命令`pnpm contracts:generate`从Nest控制器生成OpenAPI、类型及客户端，结果位于`packages/contracts/`。两端通过生成客户端和薄传输适配层请求，不另抄响应DTO。接口变更同时更新实现、契约、客户端及对应测试；`pnpm contracts:check`只检查不覆盖。所有错误响应固定`code/message/details/requestId`；requestId允许1–64个字母、数字、下划线、连字符，无效时生成UUID。
 
-执行`pnpm quality`，顺序运行冻结安装、原型保护、Biome、类型、Pro检查、规则/真实MySQL接口测试、契约无漂移、三端构建和Playwright。任何失败即停止并保留该批次证据。结果保存`docs/development/evidence/m2-*/results.json`及各步骤文本，包含基准提交、代码指纹、lockfile/fixture哈希和真实退出码。`pnpm test:e2e`使用本机已有Edge无界面运行，不下载浏览器，不连接个人浏览器档案；未安装时报告缺口。浏览器测试进程会启动并停止本项目本地测试服务。
+执行`pnpm quality --phase=m3`，顺序运行冻结安装、原型保护、Biome、类型、Pro及Ant Design组件检查、规则/真实MySQL接口测试、契约无漂移、三端构建和Playwright。任何失败即停止并保留该批次证据。结果保存`docs/development/evidence/m3-*/results.json`及各步骤文本，包含基准提交、代码指纹、lockfile/fixture哈希和真实退出码；截图也保存至对应批次，M2历史证据不覆盖。独立运行浏览器用例的截图在忽略的`infra/runtime/browser-evidence`。`pnpm test:e2e`使用本机已有Edge无界面运行，不下载浏览器、不连接个人档案；未安装时报告缺口。测试进程只启动并停止本项目服务。
+
+M3-017需要2099/2100/2100.1/2101秒自制边界视频；本会话的生成命令未获执行许可，因此测试明确skip，报告`deferredTests`记录原因。门禁即使其他检查通过也只能记`passed-with-deferred-tests`，不得称完整M3验收通过或35分钟实播边界已验证。生成器已有`--boundaries`选项，但本轮不绕过该执行限制。3秒媒体发布/Range、无效时长拒绝和M2时长规则单测分别有独立证据。
 
 规则单测覆盖不等于整项MT验收通过。功能必须逐项走接口和页面，业务尚未开发的项保留未执行。截图只是M2工程验证页及Pro基线，后续商业首页仍须遵循绿色A原型；不将工程验证页冒充商业设计。
 

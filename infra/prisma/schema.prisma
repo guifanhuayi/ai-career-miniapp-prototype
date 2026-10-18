@@ -74,6 +74,7 @@ model Course {
   author         String @db.VarChar(150)
   sourceUrl      String? @db.VarChar(1000)
   mediaUrl       String? @db.VarChar(1000)
+  mediaAssetId   String? @db.VarChar(80)
   authorization  String? @db.VarChar(500)
   isTest         Boolean @default(true)
   chapters       Json
@@ -84,6 +85,18 @@ model Course {
   mappings       CourseMapping[]
   marks          CourseMark[]
   progress       CourseProgress[]
+  mediaAsset     MediaAsset? @relation(fields: [mediaAssetId], references: [id])
+}
+model MediaAsset {
+  id              String @id @db.VarChar(80)
+  relativePath    String @db.VarChar(150)
+  durationSeconds Float
+  sha256          String @db.Char(64)
+  size            Int
+  authorization   String @db.VarChar(500)
+  isTest          Boolean @default(true)
+  verifiedAt      DateTime @default(now()) @db.DateTime(3)
+  courses         Course[]
 }
 model CourseMapping {
   courseId String @db.VarChar(80)
@@ -251,4 +264,13 @@ model DailyAggregate {
   metrics     Json
   createdAt   DateTime @default(now()) @db.DateTime(3)
   @@id([day, environment])
+}
+model IdempotencyRecord {
+  scope       String @db.VarChar(40)
+  actor       String @db.VarChar(64)
+  key         String @db.VarChar(64)
+  payloadHash String @db.Char(64)
+  response    Json
+  createdAt   DateTime @default(now()) @db.DateTime(3)
+  @@id([scope, actor, key])
 }

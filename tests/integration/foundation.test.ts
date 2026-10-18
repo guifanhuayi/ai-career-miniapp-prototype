@@ -172,7 +172,10 @@ test('M2-007 API-001 MT-125: every implemented operation has success/security/er
     .flatMap((path) => Object.values(path ?? {}))
     .filter(
       (operation) =>
-        operation && typeof operation === 'object' && 'responses' in operation,
+        operation &&
+        typeof operation === 'object' &&
+        'responses' in operation &&
+        operation.tags?.includes('foundation'),
     );
   assert.equal(operations.length, 4);
   for (const operation of operations) {

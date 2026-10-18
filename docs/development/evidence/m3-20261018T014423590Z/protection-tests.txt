@@ -1,0 +1,14 @@
+$ node --test tests/prototype-preservation.test.mjs
+✔ ENG-003: all eleven original files remain unchanged (4.1734ms)
+✔ ENG-004: a source content change is detected (2.079ms)
+✔ ENG-005: deleting an original file is detected (2.1353ms)
+✔ ENG-006: checkout line endings are tolerated, content and BOM are preserved (0.2162ms)
+✔ ENG-007: filesystem errors do not silently become preservation success (0.3868ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 610.0986

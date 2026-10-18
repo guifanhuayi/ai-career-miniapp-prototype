@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
-import { validateSync } from 'class-validator';
+import { type ValidationError, validateSync } from 'class-validator';
 import type { Request, Response } from 'express';
 import { Database } from './database';
 
@@ -41,6 +41,16 @@ export class DtoPipe implements PipeTransform {
   transform(value: unknown) {
     if (!value || typeof value !== 'object' || Array.isArray(value))
       throw new BadRequestException('Expected an object');
+    const inspect = (item: unknown, depth: number) => {
+      if (depth > 12) throw new BadRequestException('Nested data is too deep');
+      if (!item || typeof item !== 'object') return;
+      for (const [key, child] of Object.entries(item)) {
+        if (['__proto__', 'prototype', 'constructor'].includes(key))
+          throw new BadRequestException('Unsupported object key');
+        inspect(child, depth + 1);
+      }
+    };
+    inspect(value, 0);
     const object = plainToInstance(this.dto, value, {
       enableImplicitConversion: false,
     });
@@ -49,12 +59,19 @@ export class DtoPipe implements PipeTransform {
       forbidNonWhitelisted: true,
       forbidUnknownValues: true,
     });
-    if (errors.length)
-      throw new BadRequestException(
-        errors.flatMap((e) =>
-          Object.values(e.constraints ?? { nested: 'Invalid nested value' }),
-        ),
-      );
+    if (errors.length) {
+      const describe = (items: ValidationError[], prefix = ''): string[] =>
+        items.flatMap((error) => {
+          const path = prefix ? `${prefix}.${error.property}` : error.property;
+          return [
+            ...Object.values(error.constraints ?? {}).map(
+              (message) => `${path}: ${message}`,
+            ),
+            ...describe(error.children ?? [], path),
+          ];
+        });
+      throw new BadRequestException(describe(errors));
+    }
     return object;
   }
 }

@@ -16,4 +16,5 @@ allowBuilds:
   core-js-pure: false
   es5-ext: false
   esbuild: true
+  ffmpeg-static: true
   prisma: true

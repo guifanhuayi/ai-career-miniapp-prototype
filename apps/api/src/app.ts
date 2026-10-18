@@ -10,24 +10,22 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import { json } from 'express';
+import { CatalogModule } from './catalog.controller';
 import { loadLocalEnvironment, localConfig } from './config';
+import { CoreModule } from './core.module';
 import { Database } from './database';
 import { FoundationController } from './foundation.controller';
 import {
   allowedOrigins,
   type CareerRequest,
   ErrorResponse,
-  LocalAdminGuard,
   SafeExceptionFilter,
-  VisitorGuard,
 } from './http';
 
 @Module({
+  imports: [CoreModule, CatalogModule],
   controllers: [FoundationController],
   providers: [
-    Database,
-    VisitorGuard,
-    LocalAdminGuard,
     {
       provide: 'RUNTIME_CONFIG',
       useFactory: () => Object.freeze(localConfig()),

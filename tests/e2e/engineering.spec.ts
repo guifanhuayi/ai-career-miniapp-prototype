@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { evidencePath } from './evidence';
 
 test('M2-E01: H5 connects to MySQL API and restores one anonymous visitor after reload', async ({
   page,
@@ -21,7 +22,7 @@ test('M2-E01: H5 connects to MySQL API and restores one anonymous visitor after 
   expect(creations).toBe(1);
   await expect(page.getByRole('button', { name: /登录/ })).toHaveCount(0);
   await page.screenshot({
-    path: 'docs/development/evidence/m2-h5-393.png',
+    path: evidencePath('m2-h5-393.png'),
     fullPage: true,
   });
 });
@@ -43,7 +44,7 @@ test('M2-E03: official Pro status page reads guarded API and reports backend fai
   await expect(page.getByText('mysql', { exact: true })).toBeVisible();
   await expect(page).toHaveURL(/\/system/);
   await page.screenshot({
-    path: 'docs/development/evidence/m2-admin.png',
+    path: evidencePath('m2-admin.png'),
     fullPage: true,
   });
   await page.route('**/api/v1/admin/system', (route) =>
@@ -84,7 +85,7 @@ test('M2-E04: approved green tokens and393reference typography survive H5 scalin
     if (width === 393)
       expect(parseFloat(geometry.titleSize)).toBeCloseTo(28, 1);
     await page.screenshot({
-      path: `docs/development/evidence/m2-h5-${width}.png`,
+      path: evidencePath(`m2-h5-${width}.png`),
       fullPage: true,
     });
   }
