@@ -36,7 +36,9 @@ async function main() {
     const client = readFileSync(
       resolve('scripts/templates/client.ts.template'),
       'utf8',
-    ).replace('/* GENERATED_ROUTES */', JSON.stringify(routes, null, 2));
+    )
+      .replace(/\r\n/g, '\n')
+      .replace('/* GENERATED_ROUTES */', JSON.stringify(routes, null, 2));
     const target = resolve('packages/contracts');
     mkdirSync(target, { recursive: true });
     for (const [name, content] of [

@@ -21,6 +21,7 @@
 | M8-E04 | L34/35/41/42 / MT130 | 岗位→方向→任务→测验→普通课程按钮→两课切换→下架回退→非空任务列表返回→真实岗位漏斗；临时课程最后下架 |
 | M8-I01 | DB-001 / MT107/144 | 完整业务API/MySQL重启恢复；隔离测试库备份恢复；空库前五次迁移及升级0006，旧事件首次学习回填 |
 | M8-C01 | MT124 | 固定ID/时间、超过1页的数据：最新课程应在后台第一页；先失败、修复排序后通过。M3-E06补旧搜索条件下创建成功后可见，并继续发布/下架/审计 |
+| M8-N01–03 | MT144 / ENG-001 | Windows检出换行规范化、用户编辑/删除保留、原型/固定Pro/文档/私有/二进制不改、路径越界拒绝；`tests/source-newlines.test.mjs`，加入全量门禁checkout-tests |
 | M3-017续验 | MT083 | 自制2099/2100/2100.1/2101秒实际媒体发布/详情可用性；本次素材已生成，解除旧延期 |
 
 自动化位置：`tests/domain/event-queue.test.ts`、`tests/integration/{analytics,recovery}.test.ts`、`tests/e2e/{analytics,system}.spec.ts`。M7既有9组纯规则及所有旧业务测试一起回归。`scripts/benchmark-local.ts`记录本机数据量与20次单并发P50/P95，不设未经确认的生产容量目标。
