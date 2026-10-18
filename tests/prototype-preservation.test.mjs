@@ -3,16 +3,25 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import {
-  auditPrototype, baselineFiles, repositoryRoot, textDigest, prototypeBaseline, themeApproval,
+  auditPrototype, baselineFiles, repositoryRoot, textDigest, prototypeBaseline, themeApproval, documentationApproval,
 } from '../scripts/check-prototype.mjs';
 import { originalText, themedContents } from '../scripts/build-prototype-theme.mjs';
 
 const files = baselineFiles();
 const readOriginal = (path) => readFileSync(resolve(repositoryRoot, path));
 
-test('ENG-003: eleven original files match the original or explicitly approved color baseline', () => {
+test('ENG-003: eleven original files match the original or explicitly approved color/documentation baseline', () => {
   assert.equal(files.length, 11);
   assert.deepEqual(auditPrototype(files, readOriginal), []);
+});
+
+test('DOC-001: README approval is scoped, original text is archived and subsequent changes are detected', () => {
+  assert.equal(documentationApproval.baseline, prototypeBaseline);
+  assert.deepEqual(Object.keys(documentationApproval.approvedFiles), ['README.md']);
+  const originalReadme = baselineFiles({ original: true }).find((file) => file.path === 'README.md');
+  assert.equal(textDigest(readOriginal('docs/prototype-original-readme.md')), originalReadme.digest);
+  const tampered = (path) => path === 'README.md' ? Buffer.from('unauthorized README change') : readOriginal(path);
+  assert.deepEqual(auditPrototype(files, tampered), [{ path: 'README.md', reason: 'content-changed' }]);
 });
 
 test('THEME-001: only CSS color literals change across four authorized files; every script, text and layout rule is preserved', () => {

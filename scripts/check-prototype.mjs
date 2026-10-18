@@ -7,6 +7,11 @@ import { fileURLToPath } from 'node:url';
 export const prototypeBaseline = '910b4ae0704531691dbed100e62fff98cd0687a2';
 export const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const themeApproval = JSON.parse(readFileSync(resolve(repositoryRoot, 'scripts/prototype-theme.json'), 'utf8'));
+export const documentationApproval = JSON.parse(readFileSync(resolve(repositoryRoot, 'scripts/prototype-documentation.json'), 'utf8'));
+if (documentationApproval.baseline !== prototypeBaseline ||
+    JSON.stringify(Object.keys(documentationApproval.approvedFiles)) !== '["README.md"]') {
+  throw new Error('Documentation approval must cover only README.md against the original baseline.');
+}
 
 // The original repository consists only of UTF-8 text. Preserve content while
 // tolerating Git's LF/CRLF checkout conversion on Windows.
@@ -21,7 +26,7 @@ export function baselineFiles({ original = false } = {}) {
     .toString('utf8').trim().split('\n');
   return paths.map((path) => ({
     path,
-    digest: (!original && themeApproval.approvedFiles[path]) || textDigest(git(['show', `${prototypeBaseline}:${path}`])),
+    digest: (!original && (documentationApproval.approvedFiles[path] || themeApproval.approvedFiles[path])) || textDigest(git(['show', `${prototypeBaseline}:${path}`])),
   }));
 }
 
@@ -47,6 +52,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     console.error(JSON.stringify({ baseline: prototypeBaseline, problems }, null, 2));
     process.exitCode = 1;
   } else {
-    console.log(`PASS: all ${files.length} prototype files match ${prototypeBaseline} with the four-file ${themeApproval.decision} color-only exception.`);
+    console.log(`PASS: all ${files.length} prototype files match ${prototypeBaseline} with the four-file ${themeApproval.decision} color-only exception and the README-only ${documentationApproval.decision} documentation exception.`);
   }
 }
