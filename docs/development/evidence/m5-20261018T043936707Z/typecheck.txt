@@ -1,0 +1,4 @@
+$ pnpm --filter @career/domain typecheck && pnpm --filter @career/api typecheck && pnpm --filter @career/miniapp typecheck
+$ tsc --noEmit
+$ tsc --noEmit
+$ tsc --noEmit

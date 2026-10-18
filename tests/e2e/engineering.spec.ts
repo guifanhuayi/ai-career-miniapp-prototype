@@ -13,7 +13,7 @@ test('M2-E01: H5 connects to MySQL API and restores one anonymous visitor after 
       creations++;
   });
   await page.setViewportSize({ width: 393, height: 852 });
-  await page.goto('http://127.0.0.1:10086');
+  await page.goto('http://127.0.0.1:10086/#/pages/engineering/index');
   await expect(page.getByText(/API已连接 · mysql/)).toBeVisible();
   await expect(page.getByText(/清除本机存储或换设备后/)).toBeVisible();
   expect(creations).toBe(1);
@@ -30,7 +30,7 @@ test('M2-E02: H5 request failure is visible and retry recovers without resetting
   page,
 }) => {
   await page.route('**/api/v1/health', (route) => route.abort('failed'));
-  await page.goto('http://127.0.0.1:10086');
+  await page.goto('http://127.0.0.1:10086/#/pages/engineering/index');
   await expect(page.getByText(/本地服务或访客记录连接失败/)).toBeVisible();
   await page.unroute('**/api/v1/health');
   await page.getByRole('button', { name: '重新检查连接' }).click();
@@ -66,7 +66,7 @@ test('M2-E04: approved white/blue tokens and393reference typography survive H5 s
 }) => {
   for (const width of [320, 393, 430]) {
     await page.setViewportSize({ width, height: 852 });
-    await page.goto('http://127.0.0.1:10086');
+    await page.goto('http://127.0.0.1:10086/#/pages/engineering/index');
     await expect(
       page.getByRole('button', { name: '重新检查连接' }),
     ).toBeVisible();

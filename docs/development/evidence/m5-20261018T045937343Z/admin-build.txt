@@ -1,0 +1,39 @@
+$ pnpm --filter @career/admin build
+$ max build
+info  - [你知道吗？] 全局布局用 layout ，多层布局用 wrappers ，从文档了解更多路由的控制方法，详见 https://umijs.org/docs/guides/routes
+info  - Umi v4.7.3
+info  - Preparing...
+i Compiling Webpack
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+√ Webpack: Compiled successfully in 8.07s
+info  - Memory Usage: 827.91 MB (RSS: 1214.01 MB)
+
+info  - File sizes after gzip:
+
+  389.55 kB  dist\umi.24cfaf7b.js
+  174.72 kB  dist\532.6824c4d8.async.js
+  80.23 kB   dist\207.87706fb9.async.js
+  46.88 kB   dist\788.7a9d5fe4.async.js
+  43.79 kB   dist\335.fe9ea089.async.js
+  41.59 kB   dist\434.250ba799.async.js
+  18.46 kB   dist\554.022c6204.async.js
+  15.88 kB   dist\709.b2bac049.async.js
+  11.16 kB   dist\77.10e65b79.async.js
+  10.22 kB   dist\782.a07865fa.async.js
+  8.58 kB    dist\958.cc1441a0.async.js
+  4.64 kB    dist\770.44d51af1.async.js
+  3.58 kB    dist\p__Career__Courses__index.67077499.async.js
+  3.31 kB    dist\t__plugin-layout__Layout.c36cef4c.async.js
+  2.84 kB    dist\p__Career__System__index.6a407074.async.js
+  2.49 kB    dist\p__Career__Scenes__index.2de997ee.async.js
+  2.46 kB    dist\p__Career__Questions__index.dd6efc0d.async.js
+  1.49 kB    dist\p__exception__404__index.ba780bc7.async.js
+  1.29 kB    dist\scripts\loading.js
+  910 B      dist\p__Career__Releases__index.b70d0bb1.async.js
+  618 B      dist\umi.c332ebdb.css
+  372 B      dist\t__plugin-layout__Layout.5012e1ab.chunk.css
+  220 B      dist\559.d23f74be.async.js
+
+event - Build index.html

@@ -13,6 +13,7 @@ model Visitor {
   plans       LearningPlan[]
   attempts    AssessmentAttempt[]
   marks       CourseMark[]
+  courseProgress VisitorCourseProgress[]
   jobs        JobDescription[]
   analyses    AnalysisJob[]
   uploads     Upload[]
@@ -85,6 +86,7 @@ model Course {
   mappings       CourseMapping[]
   marks          CourseMark[]
   progress       CourseProgress[]
+  sharedProgress VisitorCourseProgress[]
   mediaAsset     MediaAsset? @relation(fields: [mediaAssetId], references: [id])
 }
 model MediaAsset {
@@ -117,6 +119,7 @@ model LearningPlan {
   sourceAnalysisId String? @db.Char(36)
   recommendedLevel String? @db.VarChar(16)
   selectedLevel    String? @db.VarChar(16)
+  revision         Int @default(1)
   createdAt        DateTime @default(now()) @db.DateTime(3)
   updatedAt        DateTime @updatedAt @db.DateTime(3)
   visitor          Visitor @relation(fields: [visitorId], references: [id])
@@ -141,10 +144,13 @@ model AssessmentAttempt {
   recommendedLevel String? @db.VarChar(16)
   createdAt       DateTime @default(now()) @db.DateTime(3)
   submittedAt     DateTime? @db.DateTime(3)
+  sequence        Int @default(1)
+  revision        Int @default(1)
   visitor         Visitor @relation(fields: [visitorId], references: [id])
   plan            LearningPlan @relation(fields: [planId], references: [id])
   @@unique([visitorId, idempotencyKey])
   @@index([planId, createdAt])
+  @@unique([planId, sequence])
 }
 model CourseMark {
   visitorId String @db.Char(36)
@@ -159,10 +165,24 @@ model CourseProgress {
   courseId     String @db.VarChar(80)
   position     Float @default(0)
   clientEnded  Boolean @default(false)
+  revision     Int @default(1)
+  mediaVersion String @default("") @db.Char(64)
   updatedAt    DateTime @updatedAt @db.DateTime(3)
   plan         LearningPlan @relation(fields: [planId], references: [id])
   course       Course @relation(fields: [courseId], references: [id])
   @@id([planId, courseId])
+}
+model VisitorCourseProgress {
+  visitorId   String @db.Char(36)
+  courseId    String @db.VarChar(80)
+  position    Float @default(0)
+  clientEnded Boolean @default(false)
+  revision    Int @default(1)
+  mediaVersion String @default("") @db.Char(64)
+  updatedAt   DateTime @updatedAt @db.DateTime(3)
+  visitor     Visitor @relation(fields: [visitorId], references: [id])
+  course      Course @relation(fields: [courseId], references: [id])
+  @@id([visitorId, courseId])
 }
 model JobDescription {
   id        String @id @default(uuid()) @db.Char(36)

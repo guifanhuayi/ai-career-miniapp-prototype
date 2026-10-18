@@ -1,0 +1,230 @@
+apps\api\src\learning\learning.service.ts:413:15 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    411 │             (q) =>
+    412 │               !Number.isInteger(answers[q.id]) ||
+  > 413 │               answers[q.id]! < 0 ||
+        │               ^^^^^^^^^^^^^^
+    414 │               answers[q.id]! >= q.options.length,
+    415 │           )
+  
+
+apps\api\src\learning\learning.service.ts:414:15 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    412 │               !Number.isInteger(answers[q.id]) ||
+    413 │               answers[q.id]! < 0 ||
+  > 414 │               answers[q.id]! >= q.options.length,
+        │               ^^^^^^^^^^^^^^
+    415 │           )
+    416 │         )
+  
+
+apps\api\src\learning\learning.service.ts:481:48 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    479 │         }),
+    480 │       ]);
+  > 481 │       const valid = progress?.mediaVersion === c.mediaAsset!.sha256;
+        │                                                ^^^^^^^^^^^^^
+    482 │       return {
+    483 │         course: mapCourse(c),
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    479 479 │           }),
+    480 480 │         ]);
+    481     │ - ······const·valid·=·progress?.mediaVersion·===·c.mediaAsset!.sha256;
+        481 │ + ······const·valid·=·progress?.mediaVersion·===·c.mediaAsset?.sha256;
+    482 482 │         return {
+    483 483 │           course: mapCourse(c),
+  
+
+apps\api\src\learning\learning.service.ts:487:57 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    485 │         progress: {
+    486 │           revision: progress?.revision ?? 0,
+  > 487 │           position: valid ? Math.min(progress.position, c.durationSeconds!) : 0,
+        │                                                         ^^^^^^^^^^^^^^^^^^
+    488 │           clientEnded: valid && progress.clientEnded,
+    489 │           mediaVersion: c.mediaAsset!.sha256,
+  
+
+apps\api\src\learning\learning.service.ts:489:25 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    487 │           position: valid ? Math.min(progress.position, c.durationSeconds!) : 0,
+    488 │           clientEnded: valid && progress.clientEnded,
+  > 489 │           mediaVersion: c.mediaAsset!.sha256,
+        │                         ^^^^^^^^^^^^^
+    490 │         },
+    491 │       };
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    487 487 │             position: valid ? Math.min(progress.position, c.durationSeconds!) : 0,
+    488 488 │             clientEnded: valid && progress.clientEnded,
+    489     │ - ··········mediaVersion:·c.mediaAsset!.sha256,
+        489 │ + ··········mediaVersion:·c.mediaAsset?.sha256,
+    490 490 │           },
+    491 491 │         };
+  
+
+apps\api\src\learning\learning.service.ts:509:36 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    507 │         await this.lock(tx, visitorId);
+    508 │         const c = await this.course(tx, visitorId, planId, courseId);
+  > 509 │         if (input.mediaVersion !== c.mediaAsset!.sha256)
+        │                                    ^^^^^^^^^^^^^
+    510 │           throw new ConflictException('课程媒体已更新，请刷新');
+    511 │         if (input.position > c.durationSeconds!)
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    507 507 │           await this.lock(tx, visitorId);
+    508 508 │           const c = await this.course(tx, visitorId, planId, courseId);
+    509     │ - ········if·(input.mediaVersion·!==·c.mediaAsset!.sha256)
+        509 │ + ········if·(input.mediaVersion·!==·c.mediaAsset?.sha256)
+    510 510 │             throw new ConflictException('课程媒体已更新，请刷新');
+    511 511 │           if (input.position > c.durationSeconds!)
+  
+
+apps\api\src\learning\learning.service.ts:511:30 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    509 │         if (input.mediaVersion !== c.mediaAsset!.sha256)
+    510 │           throw new ConflictException('课程媒体已更新，请刷新');
+  > 511 │         if (input.position > c.durationSeconds!)
+        │                              ^^^^^^^^^^^^^^^^^^
+    512 │           throw new UnprocessableEntityException('位置超过实际时长');
+    513 │         const existing = await tx.courseProgress.findUnique({
+  
+
+apps\miniapp\src\pages\course\index.tsx:80:37 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    78 │         ) {
+    79 │           const body = stored as ApiBody<'saveCourseProgress'>;
+  > 80 │           if (body.mediaVersion === progress.current!.mediaVersion)
+       │                                     ^^^^^^^^^^^^^^^^^
+    81 │             await send(body);
+    82 │           else Taro.removeStorageSync(pendingKey);
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     78  78 │           ) {
+     79  79 │             const body = stored as ApiBody<'saveCourseProgress'>;
+     80     │ - ··········if·(body.mediaVersion·===·progress.current!.mediaVersion)
+         80 │ + ··········if·(body.mediaVersion·===·progress.current?.mediaVersion)
+     81  81 │               await send(body);
+     82  82 │             else Taro.removeStorageSync(pendingKey);
+  
+
+apps\miniapp\src\pages\course\index.tsx:86:21 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    84 │         const body: ApiBody<'saveCourseProgress'> = {
+    85 │           ...desired,
+  > 86 │           revision: progress.current!.revision,
+       │                     ^^^^^^^^^^^^^^^^^
+    87 │           mediaVersion: progress.current!.mediaVersion,
+    88 │           idempotencyKey: `progress-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`,
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     84  84 │           const body: ApiBody<'saveCourseProgress'> = {
+     85  85 │             ...desired,
+     86     │ - ··········revision:·progress.current!.revision,
+         86 │ + ··········revision:·progress.current?.revision,
+     87  87 │             mediaVersion: progress.current!.mediaVersion,
+     88  88 │             idempotencyKey: `progress-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`,
+  
+
+apps\miniapp\src\pages\course\index.tsx:87:25 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    85 │           ...desired,
+    86 │           revision: progress.current!.revision,
+  > 87 │           mediaVersion: progress.current!.mediaVersion,
+       │                         ^^^^^^^^^^^^^^^^^
+    88 │           idempotencyKey: `progress-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`,
+    89 │         };
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     85  85 │             ...desired,
+     86  86 │             revision: progress.current!.revision,
+     87     │ - ··········mediaVersion:·progress.current!.mediaVersion,
+         87 │ + ··········mediaVersion:·progress.current?.mediaVersion,
+     88  88 │             idempotencyKey: `progress-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`,
+     89  89 │           };
+  
+
+apps\miniapp\src\pages\path\index.tsx:159:46 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    157 │             <ActionButton
+    158 │               label="开始当前列表第一课"
+  > 159 │               onClick={() => void openCourse(courses.items[0]!.id)}
+        │                                              ^^^^^^^^^^^^^^^^^
+    160 │             />
+    161 │           )}
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    157 157 │               <ActionButton
+    158 158 │                 label="开始当前列表第一课"
+    159     │ - ··············onClick={()·=>·void·openCourse(courses.items[0]!.id)}
+        159 │ + ··············onClick={()·=>·void·openCourse(courses.items[0]?.id)}
+    160 160 │               />
+    161 161 │             )}
+  
+
+apps\miniapp\src\pages\path\index.tsx:156:12 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━━━
+
+  ! Change to an optional chain.
+  
+    154 │             </View>
+    155 │           )}
+  > 156 │           {courses && courses.items[0] && (
+        │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    157 │             <ActionButton
+    158 │               label="开始当前列表第一课"
+  
+  i Unsafe fix: Change to an optional chain.
+  
+    154 154 │               </View>
+    155 155 │             )}
+    156     │ - ··········{courses·&&·courses.items[0]·&&·(
+        156 │ + ··········{courses?.items[0]·&&·(
+    157 157 │               <ActionButton
+    158 158 │                 label="开始当前列表第一课"
+  
+
+apps\miniapp\src\pages\plans\index.tsx:75:94 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    73 │                   onClick={() =>
+    74 │                     void Taro.navigateTo({
+  > 75 │                       url: `/pages/course/index?planId=${p.id}&courseId=${encodeURIComponent(p.lastCourseId!)}`,
+       │                                                                                              ^^^^^^^^^^^^^^^
+    76 │                     })
+    77 │                   }
+  
+
+Checked 93 files in 64ms. No fixes applied.
+Found 13 warnings.

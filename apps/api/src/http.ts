@@ -90,6 +90,13 @@ export class EmptyObjectPipe implements PipeTransform {
     return value;
   }
 }
+
+// REST resources with no request representation accept an absent body or {}.
+export class OptionalEmptyBodyPipe implements PipeTransform {
+  transform(value: unknown) {
+    return new EmptyObjectPipe().transform(value === undefined ? {} : value);
+  }
+}
 @Catch()
 export class SafeExceptionFilter implements ExceptionFilter {
   catch(error: unknown, host: ArgumentsHost) {

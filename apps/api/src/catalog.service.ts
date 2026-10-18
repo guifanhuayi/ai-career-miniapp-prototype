@@ -47,7 +47,7 @@ type CourseRelations = Course & {
 const availableMapping = {
   task: { status: 'published', scene: { status: 'published' } },
 };
-const availableCourse: Prisma.CourseWhereInput = {
+export const availableCourse: Prisma.CourseWhereInput = {
   status: 'published',
   durationSeconds: { gt: 0, lte: 2100 },
   mediaAsset: { durationSeconds: { gt: 0, lte: 2100 } },

@@ -1,0 +1,2 @@
+$ node scripts/check-prototype.mjs
+PASS: all 11 prototype files match 910b4ae0704531691dbed100e62fff98cd0687a2 with the four-file D01-COLOR-20261018 color-only exception.

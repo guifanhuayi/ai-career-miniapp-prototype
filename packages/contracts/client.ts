@@ -195,6 +195,66 @@ export const routes = {
     "path": "/api/v1/ocr-jobs/{ocrJobId}",
     "method": "GET",
     "successStatus": 200
+  },
+  "createLearningPlan": {
+    "path": "/api/v1/learning-plans",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "listLearningPlans": {
+    "path": "/api/v1/learning-plans",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "getLearningPlan": {
+    "path": "/api/v1/learning-plans/{planId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "updateLearningLevel": {
+    "path": "/api/v1/learning-plans/{planId}",
+    "method": "PATCH",
+    "successStatus": 200
+  },
+  "createAssessmentAttempt": {
+    "path": "/api/v1/assessment-attempts",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "getAssessmentAttempt": {
+    "path": "/api/v1/assessment-attempts/{attemptId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "saveAssessmentAnswer": {
+    "path": "/api/v1/assessment-attempts/{attemptId}/answers/{questionId}",
+    "method": "PUT",
+    "successStatus": 200
+  },
+  "submitAssessmentAttempt": {
+    "path": "/api/v1/assessment-attempts/{attemptId}/submissions",
+    "method": "POST",
+    "successStatus": 201
+  },
+  "getLearningCourse": {
+    "path": "/api/v1/learning-plans/{planId}/courses/{courseId}",
+    "method": "GET",
+    "successStatus": 200
+  },
+  "saveCourseProgress": {
+    "path": "/api/v1/learning-plans/{planId}/courses/{courseId}/progress",
+    "method": "PUT",
+    "successStatus": 200
+  },
+  "markCourse": {
+    "path": "/api/v1/me/course-marks/{courseId}",
+    "method": "PUT",
+    "successStatus": 200
+  },
+  "unmarkCourse": {
+    "path": "/api/v1/me/course-marks/{courseId}",
+    "method": "DELETE",
+    "successStatus": 200
   }
 } as const;
 export type OperationName = keyof typeof routes;

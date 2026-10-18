@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import type { ApiResult } from '../../../../../packages/contracts/client';
 import ActionButton from '../../components/ActionButton';
 import Choice from '../../components/Choice';
-import { api } from '../../services/api';
+import { api, guestApi } from '../../services/api';
+import { messageOf, openPlan, operationKey } from '../../services/learning';
 
 export default function Scene() {
   const query = Taro.useRouter().params;
@@ -15,6 +16,33 @@ export default function Scene() {
   const [selected, setSelected] = useState('');
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
+  const [busy, setBusy] = useState(false);
+  const [actionError, setActionError] = useState('');
+  const continueLearning = async () => {
+    if (!selected || busy) return;
+    setBusy(true);
+    setActionError('');
+    try {
+      const created = await guestApi('createLearningPlan', {
+        body: {
+          sceneId,
+          taskId: selected,
+          ...(analysisJobId ? { sourceAnalysisId: analysisJobId } : {}),
+          idempotencyKey: operationKey(
+            `plan-${sceneId}-${selected}-${analysisJobId ?? 'self'}`,
+          ),
+        },
+      });
+      const current = await guestApi('getLearningPlan', {
+        path: { planId: created.id },
+      });
+      await openPlan(current);
+    } catch (e) {
+      setActionError(messageOf(e));
+    } finally {
+      setBusy(false);
+    }
+  };
   useEffect(() => {
     let current = true;
     setScene(undefined);
@@ -63,6 +91,7 @@ export default function Scene() {
               key={task.id}
               label={`选择${task.name}`}
               selected={selected === task.id}
+              disabled={busy}
               onClick={() => setSelected(task.id)}
             >
               <View className="task-radio" />
@@ -85,24 +114,24 @@ export default function Scene() {
             <Text className="row-title">这次学习，目标是完成</Text>
             <Text className="description">{scene.output}</Text>
           </View>
-          {selected && (
-            <Text className="description">
-              已选择：{tasks.find((task) => task.id === selected)?.name}
-              。当前为内容目录验收；测验与学习记录将在学习模块接入。
-            </Text>
-          )}
+          {actionError && <Text className="error">{actionError}</Text>}
+          <ActionButton
+            label="确定任务，进入学习"
+            disabled={!selected || busy}
+            loading={busy}
+            onClick={() => void continueLearning()}
+          />
         </>
       )}
       <ActionButton
         label={analysisJobId ? '返回本次分析' : '返回学习目录'}
         onClick={() => {
           if (Taro.getCurrentPages().length > 1) void Taro.navigateBack();
-          else
+          else if (analysisJobId)
             void Taro.redirectTo({
-              url: analysisJobId
-                ? `/pages/analysis/index?analysisJobId=${encodeURIComponent(analysisJobId)}`
-                : '/pages/catalog/index',
+              url: `/pages/analysis/index?analysisJobId=${encodeURIComponent(analysisJobId)}`,
             });
+          else void Taro.switchTab({ url: '/pages/catalog/index' });
         }}
       />
     </View>

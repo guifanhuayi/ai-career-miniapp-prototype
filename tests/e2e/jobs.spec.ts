@@ -296,6 +296,11 @@ test('M4-E07 MT-040: late OCR from a hidden page cannot replace a newer image or
     await page
       .getByRole('button', { name: '解析我的岗位', exact: true })
       .click();
+    // Re-entering the same route mounts a second page during Taro's transition.
+    // Wait for the old hidden page to leave before interacting with the new one.
+    await expect(
+      page.getByRole('button', { name: '上传岗位截图', exact: true }),
+    ).toHaveCount(1);
     await page
       .getByRole('button', { name: '上传岗位截图', exact: true })
       .click();

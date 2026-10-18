@@ -1,0 +1,7 @@
+Scanned 6 files. No issues found.
+
+╭───────────────────────────────────╮
+│  Update available: 6.6.0 → 6.6.6  │
+│  Run: antd upgrade                │
+│  Or: npm i -g @ant-design/cli     │
+╰───────────────────────────────────╯

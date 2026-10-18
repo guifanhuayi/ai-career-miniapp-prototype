@@ -259,7 +259,7 @@ export default function AnalysisPage() {
           label="浏览全部学习方向"
           variant="link"
           disabled={busy}
-          onClick={() => void Taro.navigateTo({ url: '/pages/catalog/index' })}
+          onClick={() => void Taro.switchTab({ url: '/pages/catalog/index' })}
         />
       </View>
     </View>

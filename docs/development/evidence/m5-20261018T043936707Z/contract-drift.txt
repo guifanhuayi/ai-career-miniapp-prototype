@@ -1,0 +1,2 @@
+$ tsx --tsconfig apps/api/tsconfig.json scripts/generate-contracts.ts --check
+OpenAPI and generated types match.

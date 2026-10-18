@@ -1,0 +1,48 @@
+$ tsx --test tests/domain/*.test.ts
+✔ M2-014 MT-051/059: frozen prototype fixture has17scenes/36tasks/51level groups (1.3516ms)
+✔ M2-015 MT-065: every mock set contains two common/two scene questions with valid answer indexes (0.4252ms)
+✔ M3-C03 ADM-002: mock editor slot labels follow frozen first/fourth common questions (0.3152ms)
+✔ M2-011 API-002: generated client calls documented route and returns typed success (1.3539ms)
+✔ M2-012 API-002: generated client never treats an error response as a success (0.5058ms)
+✔ M3-C01 API-002: generated path/query encode Unicode and separators without injecting extra parameters (0.3382ms)
+✔ M3-C02 API-002: missing resource path fails before any network or mutation (0.2524ms)
+✔ M2-021 ENG-001: direct dependency versions and runtime are fixed across applications (4.2264ms)
+✔ M2-022 D01: actual official Pro template provenance and fixed design remain traceable (1.1011ms)
+✔ COURSE-006 / MT-083: duration 180 => true (0.9262ms)
+✔ COURSE-006 / MT-083: duration 181 => true (0.0961ms)
+✔ COURSE-006 / MT-083: duration 480 => true (0.0894ms)
+✔ COURSE-006 / MT-083: duration 1680 => true (0.1065ms)
+✔ COURSE-006 / MT-083: duration 2099 => true (0.1019ms)
+✔ COURSE-006 / MT-083: duration 2100 => true (0.0651ms)
+✔ COURSE-006 / MT-083: duration 2100.1 => false (0.0531ms)
+✔ COURSE-006 / MT-083: duration 2101 => false (0.0676ms)
+✔ COURSE-006 / MT-083: duration 0 => false (0.0919ms)
+✔ COURSE-006 / MT-083: duration -1 => false (0.2003ms)
+✔ COURSE-006 / MT-083: duration NaN => false (0.1867ms)
+✔ COURSE-006 / MT-083: duration Infinity => false (0.0939ms)
+✔ COURSE-006 / MT-083: duration null => false (0.069ms)
+✔ COURSE-006 / MT-083: duration undefined => false (0.0691ms)
+✔ COURSE-006 / MT-083: duration 2100 => false (0.0318ms)
+✔ QUIZ-003 / MT-073: 0/4 => beginner (0.0965ms)
+✔ QUIZ-003 / MT-073: 1/4 => beginner (0.0688ms)
+✔ QUIZ-003 / MT-073: 2/4 => intermediate (0.0309ms)
+✔ QUIZ-003 / MT-073: 3/4 => intermediate (0.0276ms)
+✔ QUIZ-003 / MT-073: 4/4 => advanced (0.0352ms)
+✔ QUIZ-003: out of range or fractional score rejected (0.2468ms)
+✔ JD-001/002 MT-019/021: Unicode code-point boundary frozen at8000 (0.2377ms)
+✔ ANA-001 MT-041/042: evidence is an exact UTF-16 slice of confirmed input (1.6601ms)
+✔ ANA-007 MT-044/045: negation and script responsibility do not imply video generation (0.2849ms)
+✔ ANA-002 MT-043: no match provides clearly typed extension without fake quote (0.1166ms)
+✔ M2-013 ANA-007: negation immediately before a generation verb is not a requirement (0.0646ms)
+✔ MT-092: duration display never supplies fixed chapter lengths (0.0798ms)
+✔ LOCAL-ADMIN-001 / MT-145: public no-login configuration fails closed (0.2145ms)
+✔ ANA-DASH-002: day boundaries use Shanghai calendar (0.781ms)
+✔ ENG-008: API Express import works in plain Node without a transitive NODE_PATH (211.7687ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 394.3446

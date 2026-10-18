@@ -45,3 +45,23 @@ page, body { background: @paper; color: @ink; font-family: -apple-system, BlinkM
 .source-text { display: block; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font-size: 13px; line-height: 1.8; color: @muted; margin-top: 12px; }
 .job-heading { overflow-wrap: anywhere; word-break: break-word; }
 .evidence-quote { display: block; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font-size: 13px; line-height: 1.8; color: @dark; background: @mint; border-radius: 8px; padding: 10px; margin-top: 10px; }
+.quiz-question { margin: 24px 0; font-size: 23px; }
+.option-letter { background: @mint; color: @primary; padding: 2px 8px; border-radius: 6px; }
+.result-dim { display: flex; justify-content: space-around; gap: 16px; }
+.course-cover { display: block; border-radius: 14px; padding: 24px 18px; background: @mint; color: @dark; font-size: 18px; font-weight: 650; margin-bottom: 16px; }
+.course-title { font-size: 23px; overflow-wrap: anywhere; }
+.course-video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; min-height: 180px; background: @ink; border-radius: 14px; }
+.chapter { padding: 16px 0; border-bottom: 1px solid @border; }
+.hero { background: @dark; color: @surface; border-radius: 22px; padding: 23px 21px; margin: 24px 0 16px; }
+.hero .eyebrow, .hero .description { color: @mint; }
+.hero .title { font-size: 23px; font-weight: 500; }
+.hero .primary { background: @accent; color: @accent-ink; width: auto; }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; }
+.section-head .primary { width: auto; padding: 8px 0; font-size: 12px; }
+.scene-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.scene-tile { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 16px 13px; }
+.scene-tile .row-title { font-size: 14px; }
+.review-backdrop { position: fixed; inset: 0; z-index: 100; background: fade(@ink,35%); display: flex; align-items: flex-end; }
+.review-sheet { width: 100%; max-width: 600px; box-sizing: border-box; max-height: 85vh; overflow-y: auto; background: @surface; color: @ink; border: 0; border-radius: 24px 24px 0 0; padding: 20px; margin: 0 auto; }
+.review-modal { position: fixed; top: auto; bottom: 0; left: 0; right: 0; }
+.review-modal::backdrop { background: fade(@ink,35%); }

@@ -24,9 +24,10 @@ import {
 import { AnalysisRunner } from './jobs/analysis.runner';
 import { JobsModule } from './jobs/jobs.controller';
 import { UploadRetentionRunner } from './jobs/upload-retention.runner';
+import { LearningModule } from './learning/learning.controller';
 
 @Module({
-  imports: [CoreModule, CatalogModule, JobsModule],
+  imports: [CoreModule, CatalogModule, JobsModule, LearningModule],
   controllers: [FoundationController],
   providers: [
     {
