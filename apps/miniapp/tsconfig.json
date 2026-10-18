@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "jsx": "react-jsx", "types": ["@tarojs/taro", "node"] },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "config/**/*.ts", "../../packages/contracts/*.ts"]
+}

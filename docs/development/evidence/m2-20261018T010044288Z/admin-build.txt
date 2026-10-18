@@ -1,0 +1,29 @@
+$ pnpm --filter @career/admin build
+$ max build
+info  - [你知道吗？] 如果你需要使用 Jest 来测试 Umi 项目, max g jest 就可以一键完成配置，详见 https://umijs.org/docs/guides/generator#jest-配置生成器
+info  - Umi v4.7.3
+info  - Preparing...
+i Compiling Webpack
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+√ Webpack: Compiled successfully in 7.99s
+info  - Memory Usage: 789.7 MB (RSS: 1131.93 MB)
+
+info  - File sizes after gzip:
+
+  387.71 kB  dist\umi.f990745a.js
+  272.15 kB  dist\593.01502ad9.async.js
+  43.24 kB   dist\64.d7bc12e4.async.js
+  40.85 kB   dist\787.bfabec64.async.js
+  15.88 kB   dist\709.b2bac049.async.js
+  12.02 kB   dist\322.6dff8a6a.async.js
+  3.31 kB    dist\t__plugin-layout__Layout.1221598e.async.js
+  1.86 kB    dist\p__Career__System__index.f709f4b2.async.js
+  1.29 kB    dist\scripts\loading.js
+  618 B      dist\umi.c332ebdb.css
+  372 B      dist\t__plugin-layout__Layout.5012e1ab.chunk.css
+  355 B      dist\p__exception__404__index.fa3597ba.async.js
+  220 B      dist\559.d23f74be.async.js
+
+event - Build index.html

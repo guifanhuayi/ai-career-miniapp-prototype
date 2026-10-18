@@ -1,0 +1,23 @@
+name: ai-career-local
+services:
+  mysql:
+    image: mysql:8.4.9@sha256:c36050afdca850f23cef85703f84c7531a5ae155a11b5ee1c60acb09937c4084
+    environment:
+      MYSQL_DATABASE: career_local
+      MYSQL_USER: career
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in local environment}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in local environment}
+      TZ: UTC
+    ports:
+      - '127.0.0.1:3307:3306'
+    volumes:
+      - career_mysql:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -u career -D career_local -e "SELECT 1"']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_0900_ai_ci', '--default-time-zone=+00:00']
+volumes:
+  career_mysql:

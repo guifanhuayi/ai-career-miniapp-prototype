@@ -1,0 +1,41 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "apps/api/src/**",
+      "apps/miniapp/src/**",
+      "apps/miniapp/config/**",
+      "packages/domain/src/**",
+      "scripts/**",
+      "infra/seed.ts",
+      "tests/domain/**",
+      "tests/integration/**",
+      "tests/e2e/**",
+      "playwright.config.ts",
+      "!scripts/check-prototype.mjs",
+      "!apps/miniapp/src/index.html",
+      "!!**/.template-pro",
+      "!!apps/admin",
+      "!!**/node_modules"
+    ],
+    "ignoreUnknown": true
+  },
+  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2 },
+  "javascript": {
+    "parser": { "unsafeParameterDecoratorsEnabled": true },
+    "formatter": { "quoteStyle": "single" }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "correctness": { "useExhaustiveDependencies": "off" }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["tests/**"],
+      "linter": { "rules": { "style": { "noNonNullAssertion": "off" } } }
+    }
+  ]
+}

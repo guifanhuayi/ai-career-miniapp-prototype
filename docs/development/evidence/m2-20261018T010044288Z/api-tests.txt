@@ -1,0 +1,24 @@
+$ tsx --tsconfig apps/api/tsconfig.json --test --test-concurrency=1 tests/integration/*.test.ts
+✔ M2-001 DB-001: migration applies to isolated real MySQL8.4 (121.4085ms)
+✔ M2-002 GUEST-001 AUTH-002 MT-017/128: anonymous issuance stores only unpredictable credential digest (50.9936ms)
+✔ M2-003 API-003: reject unknown owner/environment fields and malformed body (37.5536ms)
+✔ M2-004 AUTH-002: missing/forged credential rejected; valid me is read-only (39.3925ms)
+✔ M2-005 LOCAL-ADMIN-001: local admin rejects absent header and foreign Origin/Host (15.317ms)
+✔ M2-006 API-003: oversized JSON rejected with safe413 response (4.5349ms)
+✔ M2-007 API-001 MT-125: every implemented operation has success/security/error schemas (14.0097ms)
+✔ M2-008 EVT-004 MT-129: request metrics redact body, tokens, query and invalid correlation IDs (45.4726ms)
+✔ M2-009 DB-002: nested credential uniqueness failure rolls back visitor creation (21.3059ms)
+✔ M2-010 PLAN-001: closing/recreating API preserves visitor in MySQL (30.2471ms)
+✔ M2-016 DB-001: repeated seed preserves editorial changes and visitor records (754.3337ms)
+✔ M2-017 API-003: valid non-UUID correlation ID is preserved consistently with Swagger (8.6207ms)
+✔ M2-018 API-003: visitor creation throttles burst with429 and Retry-After (240.3694ms)
+✔ M2-019 API-001: actual success/error responses validate against every current OpenAPI operation (78.9421ms)
+✔ M2-020 API-003 EVT-004: injected database failure returns safe500 without internal diagnostic data (13.871ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4134.6987

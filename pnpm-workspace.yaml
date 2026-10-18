@@ -1,0 +1,19 @@
+packages:
+  - apps/*
+  - packages/*
+strictPeerDependencies: false
+minimumReleaseAge: 1440
+allowBuilds:
+  '@nestjs/core': false
+  '@parcel/watcher': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  '@scarf/scarf': false
+  '@swc/core': true
+  '@tarojs/binding': true
+  '@tarojs/cli': false
+  core-js: false
+  core-js-pure: false
+  es5-ext: false
+  esbuild: true
+  prisma: true

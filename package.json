@@ -1,0 +1,40 @@
+{
+  "name": "ai-career-miniapp",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": { "node": "24.19.0", "pnpm": "11.25.0" },
+  "scripts": {
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "quality": "node scripts/quality.mjs",
+    "check:prototype": "node scripts/check-prototype.mjs",
+    "test:protection": "node --test tests/prototype-preservation.test.mjs",
+    "test:domain": "tsx --test tests/domain/*.test.ts",
+    "test:e2e": "playwright test",
+    "test:api": "tsx --tsconfig apps/api/tsconfig.json --test --test-concurrency=1 tests/integration/*.test.ts",
+    "typecheck": "pnpm --filter @career/domain typecheck && pnpm --filter @career/api typecheck && pnpm --filter @career/miniapp typecheck",
+    "db:generate": "node --env-file=infra/runtime/local.env node_modules/prisma/build/index.js generate --schema infra/prisma/schema.prisma",
+    "db:migrate": "node --env-file=infra/runtime/local.env node_modules/prisma/build/index.js migrate deploy --schema infra/prisma/schema.prisma",
+    "db:seed": "tsx --tsconfig apps/api/tsconfig.json infra/seed.ts",
+    "api:dev": "pnpm --filter @career/api dev",
+    "api:build": "pnpm --filter @career/api build",
+    "miniapp:build": "pnpm --filter @career/miniapp build:weapp",
+    "h5:build": "pnpm --filter @career/miniapp build:h5",
+    "local:preview": "node scripts/start-local.mjs",
+    "admin:build": "pnpm --filter @career/admin build",
+    "contracts:generate": "tsx --tsconfig apps/api/tsconfig.json scripts/generate-contracts.ts",
+    "contracts:check": "tsx --tsconfig apps/api/tsconfig.json scripts/generate-contracts.ts --check"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.3",
+    "@playwright/test": "1.64.1",
+    "@prisma/client": "6.19.3",
+    "@types/node": "24.19.2",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "openapi-typescript": "7.13.0",
+    "prisma": "6.19.3",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

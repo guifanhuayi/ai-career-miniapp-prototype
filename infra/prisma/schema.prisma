@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model Visitor {
+  id          String @id @default(uuid()) @db.Char(36)
+  createdAt   DateTime @default(now()) @db.DateTime(3)
+  environment String @db.VarChar(16)
+  credentials VisitorCredential[]
+  plans       LearningPlan[]
+  attempts    AssessmentAttempt[]
+  marks       CourseMark[]
+  jobs        JobDescription[]
+  analyses    AnalysisJob[]
+  uploads     Upload[]
+  events      BehaviorEvent[]
+}
+model VisitorCredential {
+  id        String @id @default(uuid()) @db.Char(36)
+  tokenHash String @unique @db.Char(64)
+  visitorId String @db.Char(36)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  visitor   Visitor @relation(fields: [visitorId], references: [id])
+}
+model Scene {
+  id          String @id @db.VarChar(32)
+  name        String @db.VarChar(100)
+  category    String @db.VarChar(40)
+  icon        String @db.VarChar(32)
+  description String @db.VarChar(300)
+  output      String @db.VarChar(300)
+  syllabus    Json
+  status      String @default("draft") @db.VarChar(16)
+  version     Int @default(1)
+  position    Int
+  updatedAt   DateTime @updatedAt @db.DateTime(3)
+  tasks       Task[]
+  plans       LearningPlan[]
+  questionSets QuestionSet[]
+  @@index([status, position, id])
+}
+model Task {
+  id        String @id @db.VarChar(64)
+  sceneId   String @db.VarChar(32)
+  name      String @db.VarChar(150)
+  status    String @default("draft") @db.VarChar(16)
+  version   Int @default(1)
+  position  Int
+  updatedAt DateTime @updatedAt @db.DateTime(3)
+  scene     Scene @relation(fields: [sceneId], references: [id])
+  plans     LearningPlan[]
+  mappings  CourseMapping[]
+  @@index([sceneId, status, position])
+}
+model QuestionSet {
+  id        String @id @default(uuid()) @db.Char(36)
+  sceneId   String @db.VarChar(32)
+  version   String @db.VarChar(80)
+  questions Json
+  isMock    Boolean @default(true)
+  status    String @default("draft") @db.VarChar(16)
+  revision  Int @default(1)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  scene     Scene @relation(fields: [sceneId], references: [id])
+  @@unique([sceneId, version])
+}
+model Course {
+  id             String @id @default(uuid()) @db.VarChar(80)
+  title          String @db.VarChar(200)
+  durationSeconds Float?
+  author         String @db.VarChar(150)
+  sourceUrl      String? @db.VarChar(1000)
+  mediaUrl       String? @db.VarChar(1000)
+  authorization  String? @db.VarChar(500)
+  isTest         Boolean @default(true)
+  chapters       Json
+  status         String @default("draft") @db.VarChar(16)
+  version        Int @default(1)
+  updatedAt      DateTime @updatedAt @db.DateTime(3)
+  publishedAt    DateTime? @db.DateTime(3)
+  mappings       CourseMapping[]
+  marks          CourseMark[]
+  progress       CourseProgress[]
+}
+model CourseMapping {
+  courseId String @db.VarChar(80)
+  taskId   String @db.VarChar(64)
+  level    String @db.VarChar(16)
+  position Int @default(0)
+  course   Course @relation(fields: [courseId], references: [id])
+  task     Task @relation(fields: [taskId], references: [id])
+  @@id([courseId, taskId, level])
+  @@index([taskId, level, position])
+}
+model LearningPlan {
+  id               String @id @default(uuid()) @db.Char(36)
+  visitorId        String @db.Char(36)
+  sceneId          String @db.VarChar(32)
+  taskId           String @db.VarChar(64)
+  flowId           String @db.VarChar(64)
+  sourceAnalysisId String? @db.Char(36)
+  recommendedLevel String? @db.VarChar(16)
+  selectedLevel    String? @db.VarChar(16)
+  createdAt        DateTime @default(now()) @db.DateTime(3)
+  updatedAt        DateTime @updatedAt @db.DateTime(3)
+  visitor          Visitor @relation(fields: [visitorId], references: [id])
+  scene            Scene @relation(fields: [sceneId], references: [id])
+  task             Task @relation(fields: [taskId], references: [id])
+  attempts         AssessmentAttempt[]
+  progress         CourseProgress[]
+  @@unique([visitorId, sceneId, taskId])
+  @@index([visitorId, updatedAt, id])
+}
+model AssessmentAttempt {
+  id              String @id @default(uuid()) @db.Char(36)
+  visitorId       String @db.Char(36)
+  planId          String @db.Char(36)
+  idempotencyKey  String @db.VarChar(64)
+  questionVersion String @db.VarChar(80)
+  scoringVersion  String @db.VarChar(32)
+  snapshot        Json
+  answers         Json
+  status          String @default("draft") @db.VarChar(16)
+  score           Int?
+  recommendedLevel String? @db.VarChar(16)
+  createdAt       DateTime @default(now()) @db.DateTime(3)
+  submittedAt     DateTime? @db.DateTime(3)
+  visitor         Visitor @relation(fields: [visitorId], references: [id])
+  plan            LearningPlan @relation(fields: [planId], references: [id])
+  @@unique([visitorId, idempotencyKey])
+  @@index([planId, createdAt])
+}
+model CourseMark {
+  visitorId String @db.Char(36)
+  courseId  String @db.VarChar(80)
+  markedAt  DateTime @default(now()) @db.DateTime(3)
+  visitor   Visitor @relation(fields: [visitorId], references: [id])
+  course    Course @relation(fields: [courseId], references: [id])
+  @@id([visitorId, courseId])
+}
+model CourseProgress {
+  planId       String @db.Char(36)
+  courseId     String @db.VarChar(80)
+  position     Float @default(0)
+  clientEnded  Boolean @default(false)
+  updatedAt    DateTime @updatedAt @db.DateTime(3)
+  plan         LearningPlan @relation(fields: [planId], references: [id])
+  course       Course @relation(fields: [courseId], references: [id])
+  @@id([planId, courseId])
+}
+model JobDescription {
+  id        String @id @default(uuid()) @db.Char(36)
+  visitorId String @db.Char(36)
+  title     String @db.VarChar(100)
+  text      String @db.LongText
+  source    String @db.VarChar(24)
+  version   Int @default(1)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  visitor   Visitor @relation(fields: [visitorId], references: [id])
+  analyses  AnalysisJob[]
+  @@index([visitorId, createdAt])
+}
+model AnalysisJob {
+  id             String @id @default(uuid()) @db.Char(36)
+  visitorId      String @db.Char(36)
+  jobDescriptionId String @db.Char(36)
+  inputSnapshot  Json
+  idempotencyKey String @db.VarChar(64)
+  flowId         String @db.VarChar(64)
+  status         String @default("queued") @db.VarChar(16)
+  result         Json?
+  selectedScenes Json?
+  errorCode      String? @db.VarChar(64)
+  attempts       Int @default(0)
+  deadline       DateTime @db.DateTime(3)
+  createdAt      DateTime @default(now()) @db.DateTime(3)
+  completedAt    DateTime? @db.DateTime(3)
+  visitor        Visitor @relation(fields: [visitorId], references: [id])
+  jobDescription JobDescription @relation(fields: [jobDescriptionId], references: [id])
+  @@unique([visitorId, idempotencyKey])
+  @@index([status, deadline])
+}
+model Upload {
+  id        String @id @default(uuid()) @db.Char(36)
+  visitorId String @db.Char(36)
+  path      String @db.VarChar(500)
+  mediaType String @db.VarChar(40)
+  size      Int
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  expiresAt DateTime @db.DateTime(3)
+  visitor   Visitor @relation(fields: [visitorId], references: [id])
+  jobs      OcrJob[]
+}
+model OcrJob {
+  id        String @id @default(uuid()) @db.Char(36)
+  uploadId  String @db.Char(36)
+  status    String @db.VarChar(16)
+  provider  String @db.VarChar(40)
+  text      String? @db.LongText
+  errorCode String? @db.VarChar(64)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  upload    Upload @relation(fields: [uploadId], references: [id])
+}
+model BehaviorEvent {
+  id           String @id @db.VarChar(64)
+  visitorId    String @db.Char(36)
+  name         String @db.VarChar(64)
+  source       String @db.VarChar(16)
+  sessionId    String @db.VarChar(64)
+  flowId       String? @db.VarChar(64)
+  taskId       String? @db.VarChar(64)
+  courseId     String? @db.VarChar(80)
+  environment  String @db.VarChar(16)
+  occurredAt   DateTime @db.DateTime(3)
+  receivedAt   DateTime @default(now()) @db.DateTime(3)
+  effectiveAt  DateTime @db.DateTime(3)
+  clockAnomaly Boolean @default(false)
+  visitor      Visitor @relation(fields: [visitorId], references: [id])
+  @@index([environment, effectiveAt, name])
+  @@index([visitorId, flowId, taskId, effectiveAt])
+}
+model ApiRequestMetric {
+  id         String @id @default(uuid()) @db.Char(36)
+  requestId  String @db.VarChar(64)
+  route      String @db.VarChar(200)
+  method     String @db.VarChar(10)
+  status     Int
+  errorCode  String? @db.VarChar(64)
+  durationMs Float
+  retryCount Int @default(0)
+  environment String @db.VarChar(16)
+  createdAt  DateTime @default(now()) @db.DateTime(3)
+  @@index([createdAt])
+}
+model AdminAudit {
+  id          String @id @default(uuid()) @db.Char(36)
+  resource    String @db.VarChar(40)
+  resourceId  String @db.VarChar(80)
+  action      String @db.VarChar(24)
+  fromVersion Int?
+  toVersion   Int
+  snapshot    Json
+  createdAt   DateTime @default(now()) @db.DateTime(3)
+}
+model DailyAggregate {
+  day         String @db.Char(10)
+  environment String @db.VarChar(16)
+  metrics     Json
+  createdAt   DateTime @default(now()) @db.DateTime(3)
+  @@id([day, environment])
+}

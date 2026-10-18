@@ -1,0 +1,16 @@
+$ playwright test
+[WebServer] (node:53472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:49208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\engineering.spec.ts:3:5 › M2-E01: H5 connects to MySQL API and restores one anonymous visitor after reload (505ms)
+  ok 2 tests\e2e\engineering.spec.ts:28:5 › M2-E02: H5 request failure is visible and retry recovers without resetting visitor (364ms)
+  ok 3 tests\e2e\engineering.spec.ts:38:5 › M2-E03: official Pro status page reads guarded API and reports backend failure truthfully (1.5s)
+  ok 4 tests\e2e\engineering.spec.ts:63:5 › M2-E04: approved green tokens and393reference typography survive H5 scaling with no narrow-screen overflow (620ms)
+
+  4 passed (6.7s)

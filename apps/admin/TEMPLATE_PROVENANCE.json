@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/ant-design/ant-design-pro",
+  "tag": "v6.0.3",
+  "commit": "adfd44085738ca953573a13322c1ba84aca8b9e3",
+  "archiveExceptions": [
+    "AGENTS.md symbolic link to CLAUDE.md",
+    " .agents/skills symbolic link unsupported by Windows tar"
+  ],
+  "adaptations": [
+    "pnpm workspace and exact direct dependency versions replace npm package manager rule per approved D05",
+    "original package lock preserved in docs/upstream-package-lock.json as provenance only",
+    "local-only launch; no login routes, mock APIs, external analytics, deployment or hook installation",
+    "official ProLayout theme settings preserved"
+  ]
+}
