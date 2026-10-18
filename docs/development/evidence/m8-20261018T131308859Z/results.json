@@ -1,0 +1,45 @@
+{
+  "batch": "m8-20261018T131308859Z",
+  "startedAt": "2026-10-18T13:13:08.859Z",
+  "baseline": "5da5179b6cafc2047c8278e3b8d27ce42da0686f",
+  "codeFingerprint": "70efe1452d3c9e5ff8bc694ddd55ea169f8a56faea669fb245c3e0a6d034938b",
+  "node": "24.19.0",
+  "packageManager": "pnpm@11.25.0",
+  "lockHash": "15e3533b40f6de94785a80dd621a361b319b8551015c52cfce3d5c17a7172fe2",
+  "fixtureHash": "017a1fcfeb138d37ecced17e197293dae60459259384378774c6ea03e9f7cf90",
+  "steps": [
+    {
+      "name": "frozen-install",
+      "exitCode": 0,
+      "durationMs": 460,
+      "evidence": "frozen-install.txt"
+    },
+    {
+      "name": "prisma-client",
+      "exitCode": 0,
+      "durationMs": 6930,
+      "evidence": "prisma-client.txt"
+    },
+    {
+      "name": "prototype",
+      "exitCode": 0,
+      "durationMs": 735,
+      "evidence": "prototype.txt"
+    },
+    {
+      "name": "protection-tests",
+      "exitCode": 0,
+      "durationMs": 1570,
+      "evidence": "protection-tests.txt"
+    },
+    {
+      "name": "static-check",
+      "exitCode": 1,
+      "durationMs": 813,
+      "evidence": "static-check.txt"
+    }
+  ],
+  "deferredTests": [],
+  "result": "failed",
+  "finishedAt": "2026-10-18T13:13:19.505Z"
+}

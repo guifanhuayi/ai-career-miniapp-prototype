@@ -1,0 +1,3 @@
+$ tsx --tsconfig apps/api/tsconfig.json scripts/generate-contracts.ts --check
+Contract generation failed; verify MySQL and contract output.
+[ELIFECYCLE] Command failed with exit code 1.

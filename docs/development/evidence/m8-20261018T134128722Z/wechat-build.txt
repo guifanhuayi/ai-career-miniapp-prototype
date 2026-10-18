@@ -1,0 +1,156 @@
+$ pnpm --filter @career/miniapp build:weapp
+$ taro build --type weapp
+👽 Taro v4.3.0
+
+Tips:
+1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。
+
+
+
+● Webpack █████████████████████████  (0%)  
+ 
+
+
+● Webpack █████████████████████████ setup (2%)  
+ run
+
+
+● Webpack █████████████████████████ building (10%) 0/16 entries 16/16 dependen
+cies 0/16 modules 1 active 
+ babel-loader › src\app.config.ts
+
+
+● Webpack █████████████████████████ building (10%) 0/16 entries 16/16 dependen
+cies 0/16 modules 1 active 
+ babel-loader › src\app.config.ts
+
+
+● Webpack █████████████████████████ building (10%) 0/16 entries 16/16 dependen
+cies 1/16 modules 15 active 
+ ...4858924ed7\node_modules\@tarojs\webpack5-runner\dist\template\custom-wrapp
+er.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 148/222 depend
+encies 1/49 modules 29 active 
+ ..._modules\.pnpm\@tarojs+runtime@4.3.0\node_modules\@tarojs\runtime\dist\ind
+ex.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 220/222 depend
+encies 1/60 modules 53 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\objectSprea
+d2.js
+
+
+● Webpack █████████████████████████ building (13%)  
+ ...postcs_a0bd507555ccc16649a501f45639cee4\node_modules\postcss-loader\dist\c
+js.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 255/299 depend
+encies 3/63 modules 60 active 
+ css-loader › postcss-loader › less-loader › src\app.less
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 294/299 depend
+encies 3/92 modules 61 active 
+ ...time@7.29.10\node_modules\@babel\runtime\helpers\esm\objectWithoutProperti
+es.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 309/361 depend
+encies 12/101 modules 81 active 
+ ...el+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\arrayWithoutHol
+es.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 318/375 depend
+encies 29/103 modules 73 active 
+ ...\node_modules\.pnpm\react@18.3.1\node_modules\react\cjs\react.production.m
+in.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 342/386 depend
+encies 43/117 modules 67 active 
+ ...npm\@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\callSup
+er.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 373/389 depend
+encies 53/147 modules 94 active 
+ ...bel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\arrayLikeToArr
+ay.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 375/389 depend
+encies 53/148 modules 95 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\toPropertyK
+ey.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 385/400 depend
+encies 57/148 modules 91 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\toPropertyK
+ey.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 626/646 depend
+encies 85/176 modules 87 active 
+ ...npm\@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\constru
+ct.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 665/687 depend
+encies 103/186 modules 83 active 
+ ...@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\superPropBa
+se.js
+
+
+● Webpack █████████████████████████ building (13%) 1/16 entries 714/714 depend
+encies 148/199 modules 49 active 
+ ...arojs+runtime@4.3.0_@tarojs+shared@4.3.0\node_modules\@tarojs\api\dist\ind
+ex.js
+
+
+● Webpack █████████████████████████ building (20%) 3/16 entries 718/722 depend
+encies 159/201 modules 41 active 
+ ...arojs+runtime@4.3.0_@tarojs+shared@4.3.0\node_modules\@tarojs\api\dist\too
+ls.js
+
+
+● Webpack █████████████████████████ building (20%) 3/16 entries 729/731 depend
+encies 163/204 modules 41 active 
+ ...e@4.3.0_@tarojs+shared@4.3.0\node_modules\@tarojs\api\dist\interceptor\ind
+ex.js
+
+
+● Webpack █████████████████████████ building (61%) 15/16 entries 736/736 depen
+dencies 202/208 modules 5 active 
+ ...f16b6e53f3c00a864e5ef3eebf\node_modules\css-loader\dist\runtime\noSourceMa
+ps.js
+
+
+● Webpack █████████████████████████ sealing (71%)  
+ dependencies optimization
+
+
+● Webpack █████████████████████████ sealing (78%)  
+ chunk modules optimization
+
+
+● Webpack █████████████████████████ sealing (88%)  
+ runtime requirements
+
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ CssMinimizerPlugin
+
+
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ RealContentHashPlugin
+
+
+√ Webpack
+  Compiled successfully in 7.39s
+

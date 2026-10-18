@@ -1,0 +1,93 @@
+{
+  "batch": "m8-20261018T133256124Z",
+  "startedAt": "2026-10-18T13:32:56.124Z",
+  "baseline": "1f9717b03c14a1774c23ac4fbec8149683acd773",
+  "codeFingerprint": "608581262809a942f34e3742ce7e20ca9cd2b075e67213aeba85b0cdc1059825",
+  "node": "24.19.0",
+  "packageManager": "pnpm@11.25.0",
+  "lockHash": "c37fd6a72abc537adb08b107b66ab8ee24ee4ab9380a6cb4741b875110e8816f",
+  "fixtureHash": "b69e31f20cfbce6ec36d8ba64b6939741b36fccb15300f0e7e431bdab883ea27",
+  "steps": [
+    {
+      "name": "frozen-install",
+      "exitCode": 0,
+      "durationMs": 527,
+      "evidence": "frozen-install.txt"
+    },
+    {
+      "name": "prisma-client",
+      "exitCode": 0,
+      "durationMs": 1433,
+      "evidence": "prisma-client.txt"
+    },
+    {
+      "name": "prototype",
+      "exitCode": 0,
+      "durationMs": 702,
+      "evidence": "prototype.txt"
+    },
+    {
+      "name": "protection-tests",
+      "exitCode": 0,
+      "durationMs": 1427,
+      "evidence": "protection-tests.txt"
+    },
+    {
+      "name": "checkout-tests",
+      "exitCode": 0,
+      "durationMs": 524,
+      "evidence": "checkout-tests.txt"
+    },
+    {
+      "name": "static-check",
+      "exitCode": 0,
+      "durationMs": 613,
+      "evidence": "static-check.txt"
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 6109,
+      "evidence": "typecheck.txt"
+    },
+    {
+      "name": "test-script-types",
+      "exitCode": 0,
+      "durationMs": 2975,
+      "evidence": "test-script-types.txt"
+    },
+    {
+      "name": "admin-lint",
+      "exitCode": 0,
+      "durationMs": 2084,
+      "evidence": "admin-lint.txt"
+    },
+    {
+      "name": "admin-components",
+      "exitCode": 0,
+      "durationMs": 764,
+      "evidence": "admin-components.txt"
+    },
+    {
+      "name": "domain-tests",
+      "exitCode": 0,
+      "durationMs": 1079,
+      "evidence": "domain-tests.txt"
+    },
+    {
+      "name": "api-tests",
+      "exitCode": 0,
+      "durationMs": 76690,
+      "evidence": "api-tests.txt"
+    },
+    {
+      "name": "contract-drift",
+      "exitCode": 1,
+      "durationMs": 3139,
+      "evidence": "contract-drift.txt"
+    }
+  ],
+  "deferredTests": [],
+  "result": "failed",
+  "finishedAt": "2026-10-18T13:34:34.318Z"
+}

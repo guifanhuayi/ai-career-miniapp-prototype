@@ -1,0 +1,11 @@
+✔ M8-N01: normalize a Windows checkout without replacing local edits; idempotent (3.0982ms)
+✔ M8-N02: never rewrite protected prototypes, documentation, binary/invalid UTF8 or untracked private data (3.9376ms)
+✔ M8-N03: reject source paths outside the supplied workspace (0.8398ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.1551
