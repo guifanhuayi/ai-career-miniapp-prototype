@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { chromium } from '@playwright/test';
+import { themeApproval } from './check-prototype.mjs';
 
 // Read only the original SVG path declaration. Never execute prototype event handlers.
 const root = new URL('../', import.meta.url);
@@ -25,7 +26,7 @@ try {
     if (!/^[a-z]+$/.test(name) || !/^[a-zA-Z0-9 .,-]+$/.test(path))
       throw new Error('Invalid prototype icon');
     await page.setContent(
-      `<style>html,body{margin:0;background:transparent}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#176b4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`,
+      `<style>html,body{margin:0;background:transparent}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="${themeApproval.palette.primary}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`,
     );
     await page.screenshot({
       path: fileURLToPath(new URL(`${name}.png`, folder)),

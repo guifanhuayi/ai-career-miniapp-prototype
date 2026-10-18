@@ -32,7 +32,7 @@ export default function EngineeringStatus() {
       <Text className="eyebrow">百年前程 · AI成长课</Text>
       <Text className="title">工程环境验证</Text>
       <Text className="description">
-        沿用已确认的绿色视觉。当前为M2构建验证入口，业务页面将在后续模块接入。
+        使用已确认的白底、蓝色与橙黄色视觉。当前为工程验证入口，业务页面随模块接入。
       </Text>
       <View className="card">
         <Text className="description">{status}</Text>

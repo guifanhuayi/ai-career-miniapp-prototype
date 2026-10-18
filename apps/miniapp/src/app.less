@@ -17,11 +17,11 @@ page, body { background: @paper; color: @ink; font-family: -apple-system, BlinkM
 .catalog-row, .choice { width: 100%; text-align: left; color: @ink; border: 1px solid @border; border-radius: 16px; padding: 18px; background: @surface; margin: 12px 0; white-space: normal; font-size: 15px; line-height: 1.5; box-sizing: border-box; }
 .catalog-row { display: flex; align-items: center; gap: 14px; }
 .catalog-body { flex: 1; min-width: 0; }
-.tile-icon { width: 36px; height: 36px; min-width: 36px; border-radius: 10px; background: #edf4e8; display: flex; align-items: center; justify-content: center; }
+.tile-icon { width: 36px; height: 36px; min-width: 36px; border-radius: 10px; background: @mint; display: flex; align-items: center; justify-content: center; }
 .line-icon { width: 20px; height: 20px; display: block; }
 .choice { display: flex; align-items: flex-start; gap: 12px; }
-.task-radio { width: 17px; height: 17px; min-width: 17px; box-sizing: border-box; border: 1px solid #cad7bd; border-radius: 50%; margin-top: 4px; }
-.choice.selected .task-radio { border: 5px solid #36764a; }
+.task-radio { width: 17px; height: 17px; min-width: 17px; box-sizing: border-box; border: 1px solid @border; border-radius: 50%; margin-top: 4px; }
+.choice.selected .task-radio { border: 5px solid @primary; }
 .row-title { display: block; font-weight: 650; font-size: 16px; line-height: 1.6; }
 .catalog-row .description, .choice .description { font-size: 13px; margin: 6px 0 10px; line-height: 1.7; }
 .row-arrow { color: @primary; font-size: 24px; }

@@ -61,7 +61,7 @@ test('M2-E03: official Pro status page reads guarded API and reports backend fai
   await page.getByRole('button', { name: '重新检查' }).click();
   await expect(page.getByText('mysql', { exact: true })).toBeVisible();
 });
-test('M2-E04: approved green tokens and393reference typography survive H5 scaling with no narrow-screen overflow', async ({
+test('M2-E04: approved white/blue tokens and393reference typography survive H5 scaling with no narrow-screen overflow', async ({
   page,
 }) => {
   for (const width of [320, 393, 430]) {
@@ -80,8 +80,8 @@ test('M2-E04: approved green tokens and393reference typography survive H5 scalin
         .backgroundColor,
     }));
     expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.viewport);
-    expect(geometry.background).toBe('rgb(247, 248, 244)');
-    expect(geometry.buttonColor).toBe('rgb(23, 107, 75)');
+    expect(geometry.background).toBe('rgb(255, 255, 255)');
+    expect(geometry.buttonColor).toBe('rgb(22, 104, 220)');
     if (width === 393)
       expect(parseFloat(geometry.titleSize)).toBeCloseTo(28, 1);
     await page.screenshot({

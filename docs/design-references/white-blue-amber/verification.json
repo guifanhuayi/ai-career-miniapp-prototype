@@ -1,0 +1,141 @@
+{
+  "decision": "D01-COLOR-20261018",
+  "palette": {
+    "background": "#ffffff",
+    "primary": "#1668dc",
+    "dark": "#123b70",
+    "accent": "#faad14",
+    "accentText": "#492c00",
+    "ink": "#1f2937",
+    "muted": "#667085",
+    "subtle": "#eaf2ff",
+    "border": "#e4e7ec"
+  },
+  "results": [
+    {
+      "name": "THEME-V-home: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-jd: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-jdimage: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-review: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-loading: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-analysis: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-catalog: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-scene: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-quiz: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-result: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-path: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-course: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-plans: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-empty: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-noresults: text, controls and geometry unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-jd-sample-text: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-jd-analyse: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-jd-toggle-match: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-jd-confirm-matches: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-quiz-answer: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-quiz-quiz-next: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-quiz-quiz-back: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-path-level: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-path-course: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-path-seen: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-home-nav: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-home-category: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-home-scene: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-home-task: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-I-home-start-quiz: interaction unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "THEME-V-overview: all 15 independent frames render",
+      "status": "passed"
+    }
+  ],
+  "passed": 31
+}

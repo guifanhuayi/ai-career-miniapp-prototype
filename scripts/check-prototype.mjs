@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 export const prototypeBaseline = '910b4ae0704531691dbed100e62fff98cd0687a2';
 export const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+export const themeApproval = JSON.parse(readFileSync(resolve(repositoryRoot, 'scripts/prototype-theme.json'), 'utf8'));
 
 // The original repository consists only of UTF-8 text. Preserve content while
 // tolerating Git's LF/CRLF checkout conversion on Windows.
@@ -14,13 +15,13 @@ export function textDigest(bytes) {
   return createHash('sha256').update(text, 'utf8').digest('hex');
 }
 
-export function baselineFiles() {
+export function baselineFiles({ original = false } = {}) {
   const git = (args) => execFileSync('git', args, { cwd: repositoryRoot });
   const paths = git(['ls-tree', '-r', '--name-only', prototypeBaseline])
     .toString('utf8').trim().split('\n');
   return paths.map((path) => ({
     path,
-    digest: textDigest(git(['show', `${prototypeBaseline}:${path}`])),
+    digest: (!original && themeApproval.approvedFiles[path]) || textDigest(git(['show', `${prototypeBaseline}:${path}`])),
   }));
 }
 
@@ -46,6 +47,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     console.error(JSON.stringify({ baseline: prototypeBaseline, problems }, null, 2));
     process.exitCode = 1;
   } else {
-    console.log(`PASS: all ${files.length} original prototype files match ${prototypeBaseline}.`);
+    console.log(`PASS: all ${files.length} prototype files match ${prototypeBaseline} with the four-file ${themeApproval.decision} color-only exception.`);
   }
 }
