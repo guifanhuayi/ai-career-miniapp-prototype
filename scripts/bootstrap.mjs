@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { appendFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeSourceNewlines } from './source-newlines.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 if (process.versions.node !== '24.19.0') throw new Error('Use Node.js 24.19.0');
@@ -42,6 +43,30 @@ if (missing.length)
     exclude,
     `\n# AI career local development\n${missing.join('\n')}\n`,
   );
+const tracked = execFileSync('git', ['ls-files', '-z'], {
+  cwd: root,
+  encoding: 'utf8',
+})
+  .split('\0')
+  .filter(Boolean);
+const protectedPaths = new Set(
+  execFileSync(
+    'git',
+    [
+      'ls-tree',
+      '-rz',
+      '--name-only',
+      '910b4ae0704531691dbed100e62fff98cd0687a2',
+    ],
+    { cwd: root, encoding: 'utf8' },
+  )
+    .split('\0')
+    .filter(Boolean),
+);
+const normalized = normalizeSourceNewlines(root, tracked, protectedPaths);
+console.log(
+  `Formal source LF normalization: ${normalized} files; local edits preserved.`,
+);
 console.log(
   'Runtime and local Git exclusions ready. Original .gitignore unchanged.',
 );

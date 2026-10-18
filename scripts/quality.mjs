@@ -74,6 +74,10 @@ const steps = [
   ['prisma-client', ['db:generate']],
   ['prototype', ['check:prototype']],
   ['protection-tests', ['test:protection']],
+  [
+    'checkout-tests',
+    ['exec', 'node', '--test', 'tests/source-newlines.test.mjs'],
+  ],
   ['static-check', ['exec', 'biome', 'check', '.', '--diagnostic-level=warn']],
   ['typecheck', ['typecheck']],
   ['test-script-types', ['exec', 'tsc', '--noEmit']],
