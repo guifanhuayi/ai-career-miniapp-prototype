@@ -177,8 +177,21 @@ test('M3-001 CAT-001: all17 scenes/36 stable tasks/168 topics match preserved pr
   for (const fixture of data) {
     const scene = await call(`/scenes/${fixture.id}`);
     assert.equal(scene.name, fixture.name);
+    assert.equal(scene.category, fixture.category);
+    assert.equal(scene.description, fixture.description);
+    assert.equal(scene.output, fixture.output);
+    assert.equal(scene.icon, fixture.icon);
     assert.deepEqual(scene.syllabus, fixture.syllabus);
     const list = await call(`/scenes/${fixture.id}/tasks`);
+    assert.deepEqual(
+      list.items.map((item: { name: string }) => item.name),
+      fixture.tasks.map((item) => item.name),
+    );
+    assert.ok(
+      list.items.every(
+        (item: { output: string }) => item.output === fixture.output,
+      ),
+    );
     assert.deepEqual(
       list.items.map((item: { id: string }) => item.id),
       fixture.tasks.map((item) => item.id),
@@ -195,6 +208,11 @@ test('M3-001 CAT-001: all17 scenes/36 stable tasks/168 topics match preserved pr
   assert.equal(topics, 168);
 });
 test('M3-002 CAT-001/002 MT-053/054: search task/id/case/trim and category intersection with real empty states', async () => {
+  assert.equal(
+    (await call(`/scenes?search=${encodeURIComponent('让结果更可用')}`))
+      .items[0].id,
+    'prompt',
+  );
   assert.equal((await call('/scenes?search=%20API%20')).items[0].id, 'api');
   assert.equal(
     (await call(`/scenes?search=${encodeURIComponent('岗位专属提示词模板')}`))

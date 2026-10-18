@@ -95,6 +95,7 @@ export class CatalogService {
             OR: [
               { name: { contains: search } },
               { id: { contains: search } },
+              { description: { contains: search } },
               {
                 tasks: {
                   some: {

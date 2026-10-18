@@ -109,7 +109,7 @@
 
 ### M3执行登记（2026-10-18）
 
-脚本：`tests/integration/catalog.test.ts`、`tests/e2e/catalog.spec.ts`、`tests/domain/{contract-client,content-fixture}.test.ts`。基准`f5875d0`，最终代码指纹和锁文件见[批次m3-20261018T014423590Z](development/evidence/m3-20261018T014423590Z/results.json)及[M3审查](development/m3-review.md)。本地MySQL8.4.9，APP_ENV=test、career_test，未清空开发数据库。17项门禁命令退出0；85项自动化通过，1项跳过，不能报全量验收通过。
+脚本：`tests/integration/catalog.test.ts`、`tests/e2e/catalog.spec.ts`、`tests/domain/{contract-client,content-fixture}.test.ts`。基准`f5875d0`，最终代码指纹和锁文件见[批次m3-20261018T015023253Z](development/evidence/m3-20261018T015023253Z/results.json)及[M3审查](development/m3-review.md)。本地MySQL8.4.9，APP_ENV=test、career_test，未清空开发数据库。17项门禁命令退出0；85项自动化通过，1项跳过，不能报全量验收通过。
 
 | 新细测ID | 关联需求/工程ID | 步骤与预期 | 结果 |
 | --- | --- | --- | --- |

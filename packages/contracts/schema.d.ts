@@ -88,7 +88,7 @@ export interface paths {
         };
         /**
          * 已发布场景目录
-         * @description 中文名、英文ID及已发布任务名搜索，忽略首尾空白/英文大小写；分类取交集。按position,id升序，越界空items。
+         * @description 中文名、场景描述、英文ID及已发布任务名搜索，忽略首尾空白/英文大小写；分类取交集。按position,id升序，越界空items。
          */
         get: operations["listScenes"];
         put?: never;
