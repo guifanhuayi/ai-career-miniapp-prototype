@@ -22,10 +22,10 @@ test('M8-N01: normalize a Windows checkout without replacing local edits; idempo
 test('M8-N02: never rewrite protected prototypes, documentation, binary/invalid UTF8 or untracked private data', () => {
   const root = mkdtempSync(join(tmpdir(), 'career-newlines-'));
   try {
-    mkdirSync(join(root, 'docs')); mkdirSync(join(root, 'infra'));
-    const files = new Map([['app.js', Buffer.from('prototype\r\n')], ['docs/old.json', Buffer.from('{}\r\n')], ['infra/binary.json', Buffer.from([255,0,13,10])], ['infra/private.json', Buffer.from('private\r\n')]]);
+    mkdirSync(join(root, 'docs')); mkdirSync(join(root, 'infra')); mkdirSync(join(root, 'apps/admin'), { recursive: true });
+    const files = new Map([['app.js', Buffer.from('prototype\r\n')], ['docs/old.json', Buffer.from('{}\r\n')], ['apps/admin/upstream.ts', Buffer.from('upstream\r\n')], ['infra/binary.json', Buffer.from([255,0,13,10])], ['infra/private.json', Buffer.from('private\r\n')]]);
     for (const [name, value] of files) writeFileSync(join(root, name), value);
-    assert.equal(normalizeSourceNewlines(root, ['app.js', 'docs/old.json', 'infra/binary.json'], new Set(['app.js'])), 0);
+    assert.equal(normalizeSourceNewlines(root, ['app.js', 'docs/old.json', 'apps/admin/upstream.ts', 'infra/binary.json'], new Set(['app.js'])), 0);
     for (const [name, value] of files) assert.deepEqual(readFileSync(join(root, name)), value);
   } finally { removeFixture(root); }
 });

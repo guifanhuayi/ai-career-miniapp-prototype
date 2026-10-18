@@ -10,6 +10,7 @@ export function normalizeSourceNewlines(root, trackedPaths, protectedPaths) {
   for (const path of trackedPaths) {
     if (
       protectedPaths.has(path) ||
+      path.startsWith('apps/admin/') ||
       path.startsWith('docs/') ||
       path.includes('/docs/') ||
       !/\.(?:[cm]?[jt]sx?|json|ya?ml|less|css|toml|sql|prisma)$/.test(path)
